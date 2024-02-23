@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">ChatVista</string>
+    <string name="signinpage_heading">Welcome back</string>
+    <string name="signinpage_email_hint">Email</string>
+    <string name="signinpage_password_hint">Password</string>
+    <string name="signinpage_sign_btn_text">Sign in</string>
+    <string name="signinpage_not_account_text">Don\'t have an account?</string>
+    <string name="signinpage_go_signUp_text">Sign up</string>
+    <string name="or">OR</string>
+    <string name="don_t_get_otp">Don\'t get OTP?</string>
+    <string name="resend_otp">Resend OTP</string>
+    <string name="verify">Verify</string>
+    <string name="authentication_icon">Authentication Icon</string>
+    <string name="continue_with_google_sign">Continue with Google</string>
+    <string name="continue_with_facebook_sign">Continue with Facebook</string>
+    <string name="continue_with_phone_sign">Continue with Phone</string>
+    <string name="logo_for_chatapplication">Logo For ChatApplication</string>
+    <string name="signUpPage_heading">Create your account</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="go_log_in">Log in</string>
+    <string name="otp_instruction">Enter the OTP you received at</string>
+    <string name="signuppage_sign_btn_text">Sign Up</string>
+    <string name="default_web_client_id">561019311089-m92ng6lfh3n5hb271kgphjs26thb3pt8.apps.googleusercontent.com</string>
+    <string name="facebook_app_id">1851910488603851</string>
+    <string name="fb_login_protocol_scheme">fb1234</string>
+    <string name="facebook_client_token">56789</string>
+    <string name="go_back_main_page">Go back main page</string>
+    <string name="forget_password_btn">Forget Password</string>
+</resources>

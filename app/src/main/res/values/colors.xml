@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="royalBlue">#005BEA</color>
+    <color name="blue">#0000FF</color>
+    <color name="blueGrotto">#0091e7</color>
+    <color name="cyan">#04F9F2</color>
+    <color name="my_light_primary">#2F2FFF</color>
+</resources>

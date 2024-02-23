@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "561019311089",
+    "firebase_url": "https://chatvista-backend-default-rtdb.firebaseio.com",
+    "project_id": "chatvista-backend",
+    "storage_bucket": "chatvista-backend.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:561019311089:android:93c6b718895c86dda36a50",
+        "android_client_info": {
+          "package_name": "com.gojiyajayesh.chatvista"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "561019311089-m92ng6lfh3n5hb271kgphjs26thb3pt8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gojiyajayesh.chatvista",
+            "certificate_hash": "345ee6641f2e66f0a3457540110fa62d8589712a"
+          }
+        },
+        {
+          "client_id": "561019311089-ufsvb7prl69tdmk7vgmgkmj7gp7shplr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtkmoB912ZdzYoWOudy2C2teGOQ-Bhbp8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "561019311089-ufsvb7prl69tdmk7vgmgkmj7gp7shplr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
