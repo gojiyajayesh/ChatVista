@@ -7,4 +7,10 @@
     <color name="blueGrotto">#0091e7</color>
     <color name="cyan">#04F9F2</color>
     <color name="my_light_primary">#2F2FFF</color>
+    <color name="progress_blue">#4285F4</color>
+    <color name="progress_red">#DB4437</color>
+    <color name="progress_yellow">#F4B400</color>
+    <color name="progress_green">#0F9D58</color>
+
+
 </resources>

@@ -30,5 +30,4 @@ ProgressBar progressBar;
             finish();
         }, 1500);
     }
-
 }

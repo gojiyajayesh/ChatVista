@@ -32,7 +32,7 @@
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
             android:padding="10dp"
-            android:text="Verification"
+            android:text="@string/verification_heading"
             android:textColor="@color/black"
             android:textSize="40sp"
             android:textStyle="bold" />

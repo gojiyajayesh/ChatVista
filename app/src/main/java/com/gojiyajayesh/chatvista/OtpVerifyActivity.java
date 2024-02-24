@@ -35,7 +35,7 @@ public class OtpVerifyActivity extends AppCompatActivity {
     Button VerifyBtn;
     PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
     PhoneAuthProvider.ForceResendingToken mResendToken;
-    EditText[] Otp;
+    EditText[] otpEditTexts;
     ProgressBar progressBar;
     private String mVerificationId, otpCode;
     private long timeoutSeconds = 60L;
@@ -59,21 +59,17 @@ public class OtpVerifyActivity extends AppCompatActivity {
     }
 
     void otpInputChanger() {
-        for (int i = 0; i < Otp.length; i++) {
-            final int currentIndex = i;
-            final EditText currentEditText = Otp[currentIndex];
-
-            currentEditText.addTextChangedListener(new TextWatcher() {
+        for (int i = 0; i < otpEditTexts.length; i++) {
+            final int index = i;
+            otpEditTexts[i].addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 }
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    if (s.length() == 1 && currentIndex < Otp.length - 1) {
-                        Otp[currentIndex + 1].requestFocus();
-                    } else if (s.length() == 0 && currentIndex > 0) {
-                        Otp[currentIndex - 1].requestFocus();
+                    if (s.length() == 1 && index < otpEditTexts.length - 1) {
+                        otpEditTexts[index + 1].requestFocus();
                     }
                 }
 
@@ -81,21 +77,12 @@ public class OtpVerifyActivity extends AppCompatActivity {
                 public void afterTextChanged(Editable s) {
                 }
             });
-
-            currentEditText.setOnKeyListener(new View.OnKeyListener() {
-                @Override
-                public boolean onKey(View v, int keyCode, KeyEvent event) {
-                    if (keyCode == KeyEvent.KEYCODE_DEL && event.getAction() == KeyEvent.ACTION_DOWN) {
-                        if (currentIndex > 0) {
-                            currentEditText.setText("");
-                            Otp[currentIndex - 1].requestFocus();
-                        } else {
-                            currentEditText.setText("");
-                        }
-                        return true;
-                    }
-                    return false;
+            otpEditTexts[i].setOnKeyListener((v, keyCode, event) -> {
+                if (keyCode == KeyEvent.KEYCODE_DEL && event.getAction() == KeyEvent.ACTION_DOWN && index > 0 && otpEditTexts[index].getText().toString().isEmpty()) {
+                    otpEditTexts[index - 1].requestFocus();
+                    return true;
                 }
+                return false;
             });
         }
     }
@@ -107,7 +94,7 @@ public class OtpVerifyActivity extends AppCompatActivity {
         PhoneNumberTextView.setText(phoneNumber);
         mAuth = FirebaseAuth.getInstance();
         VerifyBtn = findViewById(R.id.verify_btn);
-        Otp = new EditText[]{findViewById(R.id.otp_1), findViewById(R.id.otp_2), findViewById(R.id.otp_3), findViewById(R.id.otp_4), findViewById(R.id.otp_5), findViewById(R.id.otp_6)};
+        otpEditTexts = new EditText[]{findViewById(R.id.otp_1), findViewById(R.id.otp_2), findViewById(R.id.otp_3), findViewById(R.id.otp_4), findViewById(R.id.otp_5), findViewById(R.id.otp_6)};
         progressBar = findViewById(R.id.progress_bar_otp);
         resendOtp = findViewById(R.id.resend_otp_txt);
         resendTime = findViewById(R.id.resendTime);
@@ -125,7 +112,7 @@ public class OtpVerifyActivity extends AppCompatActivity {
 
     String getOtp() {
         StringBuilder sb = new StringBuilder();
-        for (EditText i : Otp) {
+        for (EditText i : otpEditTexts) {
             sb.append(i.getText().toString().trim());
         }
         return sb.toString().trim();
@@ -172,8 +159,7 @@ public class OtpVerifyActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onCodeSent(@NonNull String verificationId,
-                                   @NonNull PhoneAuthProvider.ForceResendingToken token) {
+            public void onCodeSent(@NonNull String verificationId, @NonNull PhoneAuthProvider.ForceResendingToken token) {
                 mVerificationId = verificationId;
                 mResendToken = token;
                 AndroidUtils.customToast(getApplicationContext(), "OTP send successfully", Toast.LENGTH_LONG);
@@ -182,37 +168,26 @@ public class OtpVerifyActivity extends AppCompatActivity {
         };
         PhoneAuthOptions options;
         if (isRend) {
-            options = PhoneAuthOptions.newBuilder(mAuth)
-                    .setPhoneNumber(phoneNumber)
-                    .setTimeout(60L, TimeUnit.SECONDS)
-                    .setActivity(this)
-                    .setCallbacks(mCallbacks).setForceResendingToken(mResendToken)
-                    .build();
+            options = PhoneAuthOptions.newBuilder(mAuth).setPhoneNumber(phoneNumber).setTimeout(60L, TimeUnit.SECONDS).setActivity(this).setCallbacks(mCallbacks).setForceResendingToken(mResendToken).build();
         } else {
-            options = PhoneAuthOptions.newBuilder(mAuth)
-                    .setPhoneNumber(phoneNumber)
-                    .setTimeout(60L, TimeUnit.SECONDS)
-                    .setActivity(this)
-                    .setCallbacks(mCallbacks)
-                    .build();
+            options = PhoneAuthOptions.newBuilder(mAuth).setPhoneNumber(phoneNumber).setTimeout(60L, TimeUnit.SECONDS).setActivity(this).setCallbacks(mCallbacks).build();
         }
         PhoneAuthProvider.verifyPhoneNumber(options);
     }
 
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, task -> {
-                    if (task.isSuccessful()) {
-                        inProgress(false);
-                        AndroidUtils.customToast(getApplicationContext(), "Sign In Successfully", Toast.LENGTH_LONG);
-                        startActivity(new Intent(OtpVerifyActivity.this, MainActivity.class));
-                    } else {
-                        inProgress(false);
-                        AndroidUtils.customToast(getApplicationContext(), "Verification Failed!", Toast.LENGTH_LONG);
-                        if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
-                            AndroidUtils.customToast(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_LONG);
-                        }
-                    }
-                });
+        mAuth.signInWithCredential(credential).addOnCompleteListener(this, task -> {
+            if (task.isSuccessful()) {
+                inProgress(false);
+                AndroidUtils.customToast(getApplicationContext(), "Sign In Successfully", Toast.LENGTH_LONG);
+                startActivity(new Intent(OtpVerifyActivity.this, MainActivity.class));
+            } else {
+                inProgress(false);
+                AndroidUtils.customToast(getApplicationContext(), "Verification Failed!", Toast.LENGTH_LONG);
+                if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+                    AndroidUtils.customToast(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_LONG);
+                }
+            }
+        });
     }
 }
