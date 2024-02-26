@@ -21,6 +21,7 @@ import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.gojiyajayesh.chatvista.models.Users;
 import com.gojiyajayesh.chatvista.utils.AndroidUtils;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -35,6 +36,7 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Arrays;
 
@@ -46,6 +48,7 @@ public class SignInActivity extends AppCompatActivity {
     ProgressBar progressBar;
     FirebaseUser user;
     FirebaseAuth mAuth;
+    FirebaseDatabase database;
     CallbackManager mCallbackManager;
     private GoogleSignInClient mGoogleSignInClient;
 
@@ -98,6 +101,7 @@ public class SignInActivity extends AppCompatActivity {
         ForgotPassword = findViewById(R.id.forgotPasswordSignInPage);
         progressBar = findViewById(R.id.signInProgressBar);
         mAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
     }
@@ -190,9 +194,28 @@ public class SignInActivity extends AppCompatActivity {
         mAuth.signInWithCredential(GoogleAuthProvider.getCredential(idToken, null)).addOnCompleteListener(this, task -> {
             if (task.isSuccessful()) {
                 Log.d("TAG", "signInWithCredential:success");
+                FirebaseUser firebaseUser = task.getResult().getUser();
+                assert firebaseUser != null;
+                String uid = firebaseUser.getUid();
+                String email = firebaseUser.getEmail();
+                String username = firebaseUser.getDisplayName();
+                String profileId = firebaseUser.getPhotoUrl() != null ? firebaseUser.getPhotoUrl().toString() : null;
+                createUserInDatabase(uid, username, email, profileId);
+                startActivity(new Intent(SignInActivity.this,MainActivity.class));
             } else {
                 Log.w("TAG", "signInWithCredential:failure", task.getException());
             }
         });
+    }
+    private void createUserInDatabase(String uid, String username, String email, String profileId) {
+        // Assuming 'Users' is the top-level node for storing user information in the database
+        Users user = new Users(username, email, profileId);
+        database.getReference().child("Users").child(uid).setValue(user)
+                .addOnSuccessListener(aVoid -> {
+                    Log.d("TAG", "DataStore Successfully");
+                })
+                .addOnFailureListener(e -> {
+                    Log.w("TAG", "Failed!", e);
+                });
     }
 }

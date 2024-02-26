@@ -5,10 +5,10 @@
          <item name="colorPrimary">@color/my_light_primary</item>
         <item name="android:background">@color/white</item>
     </style>
-    <style name="WithActionBar" parent="Theme.AppCompat.DayNight.DarkActionBar">
+    <style name="MyThemeActionBar" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <!-- Customize your light theme here. -->
-         <item name="colorPrimary">@color/my_light_primary</item>
-        <item name="colorPrimaryDark">@color/royalBlue</item>
+         <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryDark">@color/blue</item>
          <item name="background">@color/white</item>
     </style>
     <style name="Theme.ChatVista" parent="Base.Theme.ChatVista" />

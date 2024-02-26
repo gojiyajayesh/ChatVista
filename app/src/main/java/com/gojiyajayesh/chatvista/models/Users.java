@@ -1,41 +1,54 @@
 package com.gojiyajayesh.chatvista.models;
 
 public class Users {
-    String profilePicture, userName, password, mail, userId, lastMessage;
+    String profileId;
 
-    public Users(String profilePicture, String userName, String password, String mail, String userId, String lastMessage) {
-        this.profilePicture = profilePicture;
-        this.userName = userName;
-        this.password = password;
-        this.mail = mail;
-        this.userId = userId;
+    public Users(String username, String lastMessage) {
+        this.username = username;
         this.lastMessage = lastMessage;
     }
 
-    // SignUp Constructor
-    public Users(String userName, String mail, String password) {
-        this.userName = userName;
-        this.password = password;
-        this.mail = mail;
+    String username;
+    String lastMessage;
+
+    public String getProfileId() {
+        return profileId;
     }
 
-    public Users() {
+    public void setProfileId(String profileId) {
+        this.profileId = profileId;
     }
 
-    public String getProfilePicture() {
-        return profilePicture;
+    public String getUsername() {
+        return username;
     }
 
-    public void setProfilePicture(String profilePicture) {
-        this.profilePicture = profilePicture;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getLastMessage() {
+        return lastMessage;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setLastMessage(String lastMessage) {
+        this.lastMessage = lastMessage;
+    }
+
+    public String getMessageCount() {
+        return messageCount;
+    }
+
+    public void setMessageCount(String messageCount) {
+        this.messageCount = messageCount;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public String getPassword() {
@@ -54,7 +67,7 @@ public class Users {
         this.mail = mail;
     }
 
-    public String getUserId() {
+    public String getUserId(String key) {
         return userId;
     }
 
@@ -62,11 +75,28 @@ public class Users {
         this.userId = userId;
     }
 
-    public String getLastMessage() {
-        return lastMessage;
+    String messageCount;
+    String time;
+    String password;
+    String mail;
+    String userId;
+
+    public Users(String profilePicture, String userName, String password, String mail, String userId, String lastMessage) {
+        this.profileId = profilePicture;
+        this.username = userName;
+        this.password = password;
+        this.mail = mail;
+        this.userId = userId;
+        this.lastMessage = lastMessage;
     }
 
-    public void setLastMessage(String lastMessage) {
-        this.lastMessage = lastMessage;
+    // SignUp Constructor
+    public Users(String userName, String mail, String password) {
+        this.username = userName;
+        this.password = password;
+        this.mail = mail;
+    }
+
+    public Users() {
     }
 }

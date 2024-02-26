@@ -159,11 +159,30 @@ public class SignUpActivity extends AppCompatActivity {
             if (task.isSuccessful()) {
                 AndroidUtils.customToast(getApplicationContext(), "User sign up successfully!", Toast.LENGTH_LONG);
                 Log.d("TAG", "signInWithCredential:success");
+                FirebaseUser firebaseUser = task.getResult().getUser();
+                assert firebaseUser != null;
+                String uid = firebaseUser.getUid();
+                String email = firebaseUser.getEmail();
+                String username = firebaseUser.getDisplayName();
+                String profileId = firebaseUser.getPhotoUrl() != null ? firebaseUser.getPhotoUrl().toString() : null;
+                createUserInDatabase(uid, username, email, profileId);
+                startActivity(new Intent(SignUpActivity.this,MainActivity.class));
             } else {
                 AndroidUtils.customToast(getApplicationContext(), "User sign up failed!", Toast.LENGTH_LONG);
                 Log.w("TAG", "signInWithCredential:failure", task.getException());
             }
         });
+    }
+    private void createUserInDatabase(String uid, String username, String email, String profileId) {
+        // Assuming 'Users' is the top-level node for storing user information in the database
+        Users user = new Users(username, email, profileId);
+        database.getReference().child("Users").child(uid).setValue(user)
+                .addOnSuccessListener(aVoid -> {
+                    Log.d("TAG", "DataStore Successfully");
+                })
+                .addOnFailureListener(e -> {
+                    Log.w("TAG", "Failed!", e);
+                });
     }
 
     private void signUp() {
