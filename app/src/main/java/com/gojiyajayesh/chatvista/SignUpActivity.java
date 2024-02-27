@@ -49,7 +49,7 @@ public class SignUpActivity extends AppCompatActivity {
     FirebaseDatabase database;
     FirebaseUser user;
     ProgressBar progressBar;
-    CallbackManager mCallbackManager;
+    CallbackManager fmCallbackManager;
     private GoogleSignInClient mGoogleSignInClient;
 
     @Override
@@ -58,10 +58,10 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
         initialization();
         FacebookSdk.sdkInitialize(getApplicationContext());
-        mCallbackManager = CallbackManager.Factory.create();
+        fmCallbackManager = CallbackManager.Factory.create(); // Initialize fmCallbackManager here
         FacebookSignUpBtn.setOnClickListener(view -> {
             LoginManager.getInstance().logInWithReadPermissions(SignUpActivity.this, Arrays.asList("email", "public_profile"));
-            LoginManager.getInstance().registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+            LoginManager.getInstance().registerCallback(fmCallbackManager, new FacebookCallback<LoginResult>() {
                 @Override
                 public void onSuccess(LoginResult loginResult) {
                     handleFacebookAccessToken(loginResult.getAccessToken());
@@ -86,7 +86,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        mCallbackManager.onActivityResult(requestCode, resultCode, data);
+        fmCallbackManager.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
@@ -102,19 +102,15 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void handleFacebookAccessToken(AccessToken token) {
         Log.d("TAG", "handleFacebookAccessToken:" + token);
-
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
         mAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    // Sign in success, update UI with the signed-in user's information
                     Log.d("TAG", "signInWithCredential:success");
-                    user = mAuth.getCurrentUser();
-                    assert user != null;
                     startActivity(new Intent(SignUpActivity.this, MainActivity.class));
+                    finish();
                 } else {
-                    // If sign in fails, display a message to the user.
                     Log.w("TAG", "signInWithCredential:failure", task.getException());
                     Toast.makeText(SignUpActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                 }
@@ -136,7 +132,6 @@ public class SignUpActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-        mCallbackManager = CallbackManager.Factory.create();
     }
 
     private void inProgress(boolean isProgress) {
@@ -158,7 +153,6 @@ public class SignUpActivity extends AppCompatActivity {
         mAuth.signInWithCredential(GoogleAuthProvider.getCredential(idToken, null)).addOnCompleteListener(this, task -> {
             if (task.isSuccessful()) {
                 AndroidUtils.customToast(getApplicationContext(), "User sign up successfully!", Toast.LENGTH_LONG);
-                Log.d("TAG", "signInWithCredential:success");
                 FirebaseUser firebaseUser = task.getResult().getUser();
                 assert firebaseUser != null;
                 String uid = firebaseUser.getUid();
@@ -166,16 +160,17 @@ public class SignUpActivity extends AppCompatActivity {
                 String username = firebaseUser.getDisplayName();
                 String profileId = firebaseUser.getPhotoUrl() != null ? firebaseUser.getPhotoUrl().toString() : null;
                 createUserInDatabase(uid, username, email, profileId);
-                startActivity(new Intent(SignUpActivity.this,MainActivity.class));
+                startActivity(new Intent(SignUpActivity.this, MainActivity.class));
+                finish();
             } else {
                 AndroidUtils.customToast(getApplicationContext(), "User sign up failed!", Toast.LENGTH_LONG);
                 Log.w("TAG", "signInWithCredential:failure", task.getException());
             }
         });
     }
+
     private void createUserInDatabase(String uid, String username, String email, String profileId) {
-        // Assuming 'Users' is the top-level node for storing user information in the database
-        Users user = new Users(username, email, profileId);
+        Users user = new Users(username, profileId, email, "JayeshAhir1168@1380");
         database.getReference().child("Users").child(uid).setValue(user)
                 .addOnSuccessListener(aVoid -> {
                     Log.d("TAG", "DataStore Successfully");
@@ -217,12 +212,13 @@ public class SignUpActivity extends AppCompatActivity {
                         } else {
                             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(createUserTask -> {
                                 if (createUserTask.isSuccessful()) {
-                                    Users user = new Users(username, email, password);
+                                    Users user = new Users(username, "R.drawable.dwarkadhish", email, password);
                                     String id = Objects.requireNonNull(createUserTask.getResult().getUser()).getUid();
                                     database.getReference().child("Users").child(id).setValue(user);
                                     AndroidUtils.customToast(getApplicationContext(), "User Created Successfully", Toast.LENGTH_LONG);
                                     inProgress(false);
                                     startActivity(new Intent(SignUpActivity.this, SignInActivity.class));
+                                    finish();
                                 } else {
                                     AndroidUtils.customToast(getApplicationContext(), Objects.requireNonNull(createUserTask.getException()).getMessage(), Toast.LENGTH_LONG);
                                     inProgress(false);

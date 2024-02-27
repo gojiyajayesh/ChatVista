@@ -6,13 +6,12 @@
     android:paddingBottom="8dp"
     android:layout_height="wrap_content">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/sampleProfilePicture"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_margin="8dp"
         android:padding="5dp"
-        android:background="@drawable/profile_image_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -20,12 +19,12 @@
         android:id="@+id/sampleUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="8dp"
         android:text="Jayesh Ahir"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
+        android:textColor="@color/light_black"
         app:layout_constraintStart_toEndOf="@+id/sampleProfilePicture"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,6 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="2dp"
         android:text="Last Message"
+        android:textSize="12dp"
         app:layout_constraintBottom_toBottomOf="@+id/sampleProfilePicture"
         app:layout_constraintStart_toStartOf="@+id/sampleUsername"
         app:layout_constraintTop_toBottomOf="@+id/sampleUsername"

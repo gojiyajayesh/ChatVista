@@ -5,7 +5,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.gojiyajayesh.chatvista.adepters.MainWorkAdepter;
+import com.gojiyajayesh.chatvista.adepters.MainAdepter;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         pager = findViewById(R.id.viewPager2);
         tabLayout = findViewById(R.id.tabLayout);
-        MainWorkAdepter adepter = new MainWorkAdepter(getSupportFragmentManager(), getLifecycle());
+        MainAdepter adepter = new MainAdepter(getSupportFragmentManager(), getLifecycle());
         pager.setAdapter(adepter);
         new TabLayoutMediator(tabLayout, pager, (tab, position) -> {
             if (position == 0)

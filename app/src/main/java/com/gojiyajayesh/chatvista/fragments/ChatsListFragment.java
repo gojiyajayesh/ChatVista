@@ -33,12 +33,10 @@ public class ChatsListFragment extends Fragment {
         View view= inflater.inflate(R.layout.fragment_chat_list, container, false);
         rcl=view.findViewById(R.id.chatListRecyclerView);
         database=FirebaseDatabase.getInstance();
-        list.add(new Users("Gojiya" ,"Hello"));
-        UserChatListAdepter adepter=new UserChatListAdepter(list);
+        UserChatListAdepter adepter=new UserChatListAdepter(list,getContext());
         LinearLayoutManager layoutManager=new LinearLayoutManager(getContext());
         rcl.setLayoutManager(layoutManager);
         rcl.setAdapter(adepter);
-
         database.getReference().child("Users").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

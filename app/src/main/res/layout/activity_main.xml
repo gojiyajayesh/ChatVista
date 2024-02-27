@@ -15,7 +15,7 @@
         app:tabTextColor="@color/white"
         app:tabGravity="fill"
         app:tabMode="fixed"
-        app:tabIndicatorColor="@color/progress_red"
+        app:tabIndicatorColor="@color/white"
         android:background="@color/royalBlue"/>
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager2"

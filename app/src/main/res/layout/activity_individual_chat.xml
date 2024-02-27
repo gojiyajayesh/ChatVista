@@ -1,0 +1,151 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".IndividualChatActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/blue">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:background="@color/blue">
+
+            <ImageButton
+                android:id="@+id/goBackMain"
+                android:layout_width="27dp"
+                android:layout_height="24dp"
+                android:background="@color/blue"
+                android:src="@drawable/arrow_left"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/sampleProfilePicture"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="2dp"
+                android:background="@color/blue"
+                app:layout_constraintBottom_toBottomOf="@+id/goBackMain"
+                app:layout_constraintStart_toEndOf="@+id/goBackMain"
+                app:layout_constraintTop_toTopOf="@+id/goBackMain" />
+
+            <TextView
+                android:id="@+id/ChatActivityUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginStart="6dp"
+                android:background="@color/blue"
+                android:text="Gojiya Jayesh"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/sampleProfilePicture"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
+                app:layout_constraintStart_toEndOf="@+id/sampleProfilePicture"
+                app:layout_constraintTop_toTopOf="@+id/sampleProfilePicture"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintVertical_bias="0.0"/>
+
+            <TextView
+                android:id="@+id/userChatStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/blue"
+                android:text="Online"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/ChatActivityUsername"
+                app:layout_constraintHorizontal_bias="0.02"
+                app:layout_constraintStart_toStartOf="@+id/ChatActivityUsername"
+                app:layout_constraintTop_toBottomOf="@+id/ChatActivityUsername"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="250dp" />
+
+            <ImageButton
+                android:id="@+id/normalCallButton"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:background="@color/blue"
+                android:src="@drawable/call_24px"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/videoCallButton"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/videoCallButton"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:background="@color/blue"
+                android:src="@drawable/video_outline"
+                app:layout_constraintBottom_toBottomOf="@+id/normalCallButton"
+                app:layout_constraintEnd_toStartOf="@+id/menuButton"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/normalCallButton"
+                app:layout_constraintTop_toTopOf="@+id/normalCallButton" />
+
+            <ImageButton
+                android:id="@+id/menuButton"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="Menu Button"
+                android:src="@drawable/menu_24px"
+                app:layout_constraintBottom_toBottomOf="@+id/videoCallButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/videoCallButton"
+                app:layout_constraintTop_toTopOf="@+id/videoCallButton"
+                tools:ignore="TouchTargetSizeCheck" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/layout2"
+        android:layout_below="@+id/toolbar" />
+
+    <LinearLayout
+        android:id="@+id/layout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        android:layout_alignParentBottom="true">
+
+        <EditText
+            android:id="@+id/message"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="7"
+            android:layout_marginStart="6dp"
+            android:background="@drawable/phone_input_background"
+            android:hint="Message"
+            android:paddingStart="10dp" />
+
+        <ImageButton
+            android:id="@+id/sendMessage"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/continue_with_google_sign"
+            android:padding="8dp"
+            android:background="@drawable/circle_btn_background"
+            android:src="@drawable/send" />
+    </LinearLayout>
+</RelativeLayout>

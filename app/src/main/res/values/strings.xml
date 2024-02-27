@@ -21,7 +21,7 @@
     <string name="otp_instruction">Enter the OTP you received at</string>
     <string name="signuppage_sign_btn_text">Sign Up</string>
     <string name="default_web_client_id">561019311089-m92ng6lfh3n5hb271kgphjs26thb3pt8.apps.googleusercontent.com</string>
-    <string name="facebook_app_id">1851910488603851</string>
+    <string name="facebook_app_id">784024083598482</string>
     <string name="fb_login_protocol_scheme">fb1234</string>
     <string name="facebook_client_token">56789</string>
     <string name="go_back_main_page">Go back main page</string>
@@ -29,4 +29,5 @@
     <string name="verification_heading">Verification</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="profilephoto">ProfilePhoto</string>
 </resources>

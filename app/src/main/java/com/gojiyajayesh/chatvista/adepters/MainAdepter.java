@@ -2,7 +2,6 @@ package com.gojiyajayesh.chatvista.adepters;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
@@ -11,9 +10,9 @@ import com.gojiyajayesh.chatvista.fragments.CallsListFragment;
 import com.gojiyajayesh.chatvista.fragments.ChatsListFragment;
 import com.gojiyajayesh.chatvista.fragments.StatusesListFragment;
 
-public class MainWorkAdepter extends FragmentStateAdapter {
+public class MainAdepter extends FragmentStateAdapter {
 
-    public MainWorkAdepter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
+    public MainAdepter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
         super(fragmentManager, lifecycle);
     }
 
