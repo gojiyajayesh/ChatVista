@@ -11,7 +11,7 @@
     <color name="progress_red">#DB4437</color>
     <color name="progress_yellow">#F4B400</color>
     <color name="progress_green">#0F9D58</color>
-    <color name="light_blue">#ADD8E6</color>
+    <color name="light_blue">#5175E4</color>
     <color name="coral">#FF7F50</color>
     <color name="peach">#FFDAB9</color>
     <color name="teal_blue">#367588</color>
@@ -20,4 +20,6 @@
     <color name="mint_green">#98FB98</color>
     <color name="navy_blue">#000080</color>
     <color name="light_black">#C4121B22</color>
+    <color name="receiver_message_color">#304FFE</color>
+    <color name="sender_message_color">#3D75B3</color>
 </resources>

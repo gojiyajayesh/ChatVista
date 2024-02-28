@@ -17,13 +17,21 @@ import com.gojiyajayesh.chatvista.IndividualChatActivity;
 import com.gojiyajayesh.chatvista.R;
 import com.gojiyajayesh.chatvista.models.Users;
 import com.gojiyajayesh.chatvista.utils.AndroidUtils;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class UserChatListAdepter extends RecyclerView.Adapter<UserChatListAdepter.UserHolder> {
     private ArrayList<Users> list;
     private Context context;
+    SimpleDateFormat sdf;
 
     public UserChatListAdepter(ArrayList<Users> list, Context context) {
         this.list = list;
@@ -34,29 +42,50 @@ public class UserChatListAdepter extends RecyclerView.Adapter<UserChatListAdepte
     @Override
     public UserHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.user_raw_sample_layout, parent, false);
+        View view = inflater.inflate(R.layout.user_list_sample_layout, parent, false);
         return new UserHolder(view);
     }
-
     @Override
     public void onBindViewHolder(@NonNull UserHolder holder, int position) {
-        holder.lastMessage.setText(list.get(position).getLastMessage()!=null?list.get(position).getLastMessage():"Hello");
-        holder.username.setText(list.get(position).getUsername());
-        Picasso.get().load(list.get(position).getProfileId()).placeholder(R.drawable.dwarkadhish).into(holder.profilePicture);
+        Users users=list.get(position);
+        FirebaseDatabase.getInstance().getReference().child("Chats")
+                        .child(FirebaseAuth.getInstance().getUid()+users.getUserId())
+                                .orderByChild("timestamp").limitToLast(1)
+                        .addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if(snapshot.hasChildren())
+                                {
+                                    for(DataSnapshot i:snapshot.getChildren())
+                                    {
+                                        holder.lastMessage.setText(i.child("message").getValue(String.class));
+                                        sdf = new SimpleDateFormat("hh:mm a");
+                                        String time = sdf.format(new Date(i.child("messageTime").getValue(Long.class)));
+                                        holder.messageArrivalTime.setText(time);
+                                    }
+                                }
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+        holder.username.setText(users.getUsername());
+        Picasso.get().load(users.getProfileId()).placeholder(R.drawable.dwarkadhish).into(holder.profilePicture);
         holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(context, IndividualChatActivity.class);
-            intent.putExtra("Username", list.get(position).getUsername());
-            intent.putExtra("ProfilePicture", list.get(position).getProfileId());
+            intent.putExtra("UserId",users.getUserId());
+            intent.putExtra("Username", users.getUsername());
+            intent.putExtra("ProfilePicture", users.getProfileId());
             context.startActivity(intent);
         });
-
         holder.profilePicture.setOnClickListener(view -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setTitle(list.get(position).getUsername());
+            builder.setTitle(users.getUsername());
             LayoutInflater inflater = LayoutInflater.from(holder.itemView.getContext());
             View dialogView = inflater.inflate(R.layout.profile_picture_view, null);
             ImageView profilePictureClick = dialogView.findViewById(R.id.profilePictureClick);
-            Picasso.get().load(list.get(position).getProfileId()).placeholder(R.drawable.dwarkadhish).into(profilePictureClick);
+            Picasso.get().load(users.getProfileId()).placeholder(R.drawable.dwarkadhish).into(profilePictureClick);
             builder.setView(dialogView);
             builder.setPositiveButton("OK", (dialog, which) -> {
                 dialog.dismiss();

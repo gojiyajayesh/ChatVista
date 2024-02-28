@@ -1,5 +1,6 @@
 package com.gojiyajayesh.chatvista.fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -38,16 +39,18 @@ public class ChatsListFragment extends Fragment {
         rcl.setLayoutManager(layoutManager);
         rcl.setAdapter(adepter);
         database.getReference().child("Users").addValueEventListener(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                list.clear();
                 for(DataSnapshot dataSnapshot:snapshot.getChildren())
                 {
                     Users users=dataSnapshot.getValue(Users.class);
                     assert users != null;
                     users.setUserId(dataSnapshot.getKey());
                     list.add(users);
+                    adepter.notifyDataSetChanged();
                 }
-                adepter.notifyDataSetChanged();
             }
 
             @Override

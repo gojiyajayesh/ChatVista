@@ -28,6 +28,6 @@ ProgressBar progressBar;
             progressBar.clearAnimation();
             startActivity(new Intent(SplashActivity.this, SignInActivity.class));
             finish();
-        }, 1500);
+        }, 1000);
     }
 }

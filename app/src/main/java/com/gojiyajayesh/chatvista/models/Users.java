@@ -2,12 +2,26 @@ package com.gojiyajayesh.chatvista.models;
 
 public class Users {
     String UserId, Username,LastMessage,ProfileId,Password,Email;
+    Long LastMessageTime;
+    public Long getLastMessageTime() {
+        return LastMessageTime;
+    }
 
-    public Users(String username,String profileId, String email, String password) {
+    public Users(String lastMessage, Long lastMessageTime) {
+        LastMessage = lastMessage;
+        LastMessageTime = lastMessageTime;
+    }
+
+    public void setLastMessageTime(Long lastMessageTime) {
+        LastMessageTime = lastMessageTime;
+    }
+
+    public Users(String UserId, String username, String profileId, String email, String password) {
         ProfileId = profileId;
         Password = password;
         Email = email;
         Username =username;
+       this.UserId=UserId;
     }
     public Users(){}
     public String getUserId() {

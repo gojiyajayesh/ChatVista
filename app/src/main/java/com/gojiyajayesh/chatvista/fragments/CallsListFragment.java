@@ -12,7 +12,7 @@ import com.gojiyajayesh.chatvista.R;
 
 public class CallsListFragment extends Fragment {
     public CallsListFragment() {
-        // Required empty public constructor
+
     }
 
     @Override

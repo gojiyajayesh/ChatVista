@@ -150,27 +150,38 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void firebaseAuthWithGoogle(String idToken) {
-        mAuth.signInWithCredential(GoogleAuthProvider.getCredential(idToken, null)).addOnCompleteListener(this, task -> {
-            if (task.isSuccessful()) {
-                AndroidUtils.customToast(getApplicationContext(), "User sign up successfully!", Toast.LENGTH_LONG);
-                FirebaseUser firebaseUser = task.getResult().getUser();
-                assert firebaseUser != null;
-                String uid = firebaseUser.getUid();
-                String email = firebaseUser.getEmail();
-                String username = firebaseUser.getDisplayName();
-                String profileId = firebaseUser.getPhotoUrl() != null ? firebaseUser.getPhotoUrl().toString() : null;
-                createUserInDatabase(uid, username, email, profileId);
-                startActivity(new Intent(SignUpActivity.this, MainActivity.class));
-                finish();
-            } else {
-                AndroidUtils.customToast(getApplicationContext(), "User sign up failed!", Toast.LENGTH_LONG);
-                Log.w("TAG", "signInWithCredential:failure", task.getException());
-            }
-        });
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser == null) {
+            mAuth.signInWithCredential(GoogleAuthProvider.getCredential(idToken, null)).addOnCompleteListener(this, task -> {
+                if (task.isSuccessful()) {
+                    AndroidUtils.customToast(getApplicationContext(), "User sign up successfully!", Toast.LENGTH_LONG);
+                    FirebaseUser firebaseUser = task.getResult().getUser();
+                    assert firebaseUser != null;
+                    String uid = firebaseUser.getUid();
+                    String email = firebaseUser.getEmail();
+                    String username = firebaseUser.getDisplayName();
+                    String profileId = firebaseUser.getPhotoUrl() != null ? firebaseUser.getPhotoUrl().toString() : null;
+                    createUserInDatabase(uid, username, email, profileId);
+                    startActivity(new Intent(SignUpActivity.this, MainActivity.class));
+                    finish();
+                } else {
+                    AndroidUtils.customToast(getApplicationContext(), "User sign up failed!", Toast.LENGTH_LONG);
+                    Log.w("TAG", "signInWithCredential:failure", task.getException());
+                }
+            });
+        } else {
+            mGoogleSignInClient.signOut().addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    // Sign out from Google account
+                    // You can show a message or do something else here
+                }
+            });
+        }
     }
 
     private void createUserInDatabase(String uid, String username, String email, String profileId) {
-        Users user = new Users(username, profileId, email, "JayeshAhir1168@1380");
+        Users user = new Users(uid,username, profileId, email, "JayeshAhir1168@1380");
         database.getReference().child("Users").child(uid).setValue(user)
                 .addOnSuccessListener(aVoid -> {
                     Log.d("TAG", "DataStore Successfully");
@@ -212,8 +223,8 @@ public class SignUpActivity extends AppCompatActivity {
                         } else {
                             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(createUserTask -> {
                                 if (createUserTask.isSuccessful()) {
-                                    Users user = new Users(username, "R.drawable.dwarkadhish", email, password);
                                     String id = Objects.requireNonNull(createUserTask.getResult().getUser()).getUid();
+                                    Users user = new Users(id,username, "R.drawable.dwarkadhish", email, password);
                                     database.getReference().child("Users").child(id).setValue(user);
                                     AndroidUtils.customToast(getApplicationContext(), "User Created Successfully", Toast.LENGTH_LONG);
                                     inProgress(false);

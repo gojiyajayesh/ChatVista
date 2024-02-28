@@ -15,6 +15,9 @@
         android:theme="@style/Theme.ChatVista"
         tools:targetApi="31">
         <activity
+            android:name=".UserChatProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".IndividualChatActivity"
             android:exported="false" />
         <activity

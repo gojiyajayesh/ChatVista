@@ -78,9 +78,9 @@ public class SignInActivity extends AppCompatActivity {
             });
         });
         ForgotPassword.setOnClickListener(v -> {
-                startActivity(new Intent(SignInActivity.this,ForgotPasswordActivity.class));
+            startActivity(new Intent(SignInActivity.this, ForgotPasswordActivity.class));
         });
-        PhoneSignInBtn.setOnClickListener(v->startActivity(new Intent(SignInActivity.this,PhoneLogInActivity.class)));
+        PhoneSignInBtn.setOnClickListener(v -> startActivity(new Intent(SignInActivity.this, PhoneLogInActivity.class)));
         GoogleSignInBtn.setOnClickListener(v -> {
             signInGoogle();
         });
@@ -120,7 +120,7 @@ public class SignInActivity extends AppCompatActivity {
             inProgress(true);
             String email = Email.getText().toString().trim();
             String password = Password.getText().toString().trim();
-            if(email.isEmpty()||password.isEmpty()){
+            if (email.isEmpty() || password.isEmpty()) {
                 if (email.isEmpty()) {
                     Email.setError("Email cannot be empty");
                     inProgress(false);
@@ -129,8 +129,7 @@ public class SignInActivity extends AppCompatActivity {
                     Password.setError("Password cannot be empty");
                     inProgress(false);
                 }
-            }
-            else {
+            } else {
                 mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         startActivity(new Intent(SignInActivity.this, MainActivity.class));
@@ -143,15 +142,21 @@ public class SignInActivity extends AppCompatActivity {
                 });
             }
         });
-        if (mAuth.getCurrentUser() != null){
+        if (mAuth.getCurrentUser() != null) {
             startActivity(new Intent(SignInActivity.this, MainActivity.class));
             finish();
         }
     }
 
     private void signInGoogle() {
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
+        mGoogleSignInClient.signOut().addOnCompleteListener(this, new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                // Start the sign-in intent
+                Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+                startActivityForResult(signInIntent, RC_SIGN_IN);
+            }
+        });
     }
 
     private void handleFacebookAccessToken(AccessToken token) {
@@ -201,15 +206,16 @@ public class SignInActivity extends AppCompatActivity {
                 String username = firebaseUser.getDisplayName();
                 String profileId = firebaseUser.getPhotoUrl() != null ? firebaseUser.getPhotoUrl().toString() : null;
                 createUserInDatabase(uid, username, email, profileId);
-                startActivity(new Intent(SignInActivity.this,MainActivity.class));
+                startActivity(new Intent(SignInActivity.this, MainActivity.class));
                 finish();
             } else {
                 Log.w("TAG", "signInWithCredential:failure", task.getException());
             }
         });
     }
+
     private void createUserInDatabase(String uid, String username, String email, String profileId) {
-        Users user = new Users(username,profileId,email,"JayeshAhir1168@1380");
+        Users user = new Users(uid, username, profileId, email, "JayeshAhir1168@1380");
         database.getReference().child("Users").child(uid).setValue(user)
                 .addOnSuccessListener(aVoid -> {
                     Log.d("TAG", "DataStore Successfully");

@@ -19,8 +19,8 @@
 
             <ImageButton
                 android:id="@+id/goBackMain"
-                android:layout_width="27dp"
-                android:layout_height="24dp"
+                android:layout_width="34dp"
+                android:layout_height="20dp"
                 android:background="@color/blue"
                 android:src="@drawable/arrow_left"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -115,6 +115,7 @@
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/MessageListRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/layout2"
