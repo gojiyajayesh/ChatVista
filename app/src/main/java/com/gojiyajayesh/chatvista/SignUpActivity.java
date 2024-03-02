@@ -207,10 +207,10 @@ public class SignUpActivity extends AppCompatActivity {
                             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(createUserTask -> {
                                 if (createUserTask.isSuccessful()) {
                                     String id = Objects.requireNonNull(createUserTask.getResult().getUser()).getUid();
-                                    Users user = new Users(id, username, "R.drawable.dwarkadhish", email, password);
+                                    Users user = new Users(id, username, null, email, password);
                                     database.getReference().child("Users").child(id).setValue(user);
                                     AndroidUtils.customToast(getApplicationContext(), "User Created Successfully", Toast.LENGTH_LONG);
-                                    Intent intent = new Intent(SignUpActivity.this, SignInActivity.class);
+                                    Intent intent = new Intent(SignUpActivity.this, UserNameActivity.class);
                                     intent.putExtra("EmailOrPhone", email);
                                     startActivity(intent);
                                     finish();
