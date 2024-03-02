@@ -66,6 +66,7 @@ public class UserNameActivity extends AppCompatActivity {
         PhoneOrEmail = user2.getPhoneOrEmail();
         Uid = user2.getUserId();
         ProfileId = user2.getProfileId();
+        Picasso.get().load(user2.getProfileId()).placeholder(R.drawable.default_profile_picture).into(ProfilePic);
         Password=user2.getPassword();
         getUsername();
         ContinueBtn.setOnClickListener(view -> {

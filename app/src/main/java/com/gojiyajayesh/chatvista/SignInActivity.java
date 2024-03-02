@@ -81,7 +81,10 @@ public class SignInActivity extends AppCompatActivity {
         });
 
         forgotPasswordTextView.setOnClickListener(v -> startActivity(new Intent(SignInActivity.this, ForgotPasswordActivity.class)));
-        phoneSignInButton.setOnClickListener(v -> startActivity(new Intent(SignInActivity.this, PhoneLogInActivity.class)));
+        phoneSignInButton.setOnClickListener(v -> {
+            Intent intent = new Intent(SignInActivity.this, PhoneLogInActivity.class);
+            finish();
+        });
         googleSignInButton.setOnClickListener(v -> signInWithGoogle());
         signUpTextView.setOnClickListener(v -> startActivity(new Intent(SignInActivity.this, SignUpActivity.class)));
         signIn();
