@@ -9,47 +9,57 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.gojiyajayesh.chatvista.adepters.MainAdepter;
+import com.gojiyajayesh.chatvista.adapters.MainAdapter;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
-    ViewPager2 pager;
-    TabLayout tabLayout;
+    private ViewPager2 viewPager;
+    private TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        pager = findViewById(R.id.viewPager2);
+
+        viewPager = findViewById(R.id.viewPager2);
         tabLayout = findViewById(R.id.tabLayout);
-        MainAdepter adepter = new MainAdepter(getSupportFragmentManager(), getLifecycle());
-        pager.setAdapter(adepter);
-        new TabLayoutMediator(tabLayout, pager, (tab, position) -> {
-            if (position == 0)
-                tab.setText("Chat");
-            else if (position == 1)
-                tab.setText("Status");
-            else
-                tab.setText("Calls");
+
+        MainAdapter adapter = new MainAdapter(getSupportFragmentManager(), getLifecycle());
+        viewPager.setAdapter(adapter);
+
+        new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
+            switch (position) {
+                case 0:
+                    tab.setText("Chat");
+                    break;
+                case 1:
+                    tab.setText("Status");
+                    break;
+                case 2:
+                    tab.setText("Calls");
+                    break;
+            }
         }).attach();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu,menu);
+        getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int ItemId=item.getItemId();
-        if(ItemId==R.id.logoutAccount)
-        {
+        int itemId = item.getItemId();
+        if (itemId == R.id.logoutAccount) {
             FirebaseAuth.getInstance().signOut();
-            startActivity(new Intent(MainActivity.this,SignInActivity.class));
+            startActivity(new Intent(MainActivity.this, SignInActivity.class));
             finish();
+            return true;
+        } else if (itemId == R.id.search) {
+            startActivity(new Intent(MainActivity.this, SearchUserActivity.class));
             return true;
         }
         return super.onOptionsItemSelected(item);

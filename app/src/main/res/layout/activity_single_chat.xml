@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".IndividualChatActivity">
+    tools:context=".SingleChatActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/SingleActivitytoolbar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@color/blue">
@@ -18,7 +18,7 @@
             android:background="@color/blue">
 
             <ImageButton
-                android:id="@+id/goBackMain"
+                android:id="@+id/SingleActivitygoBackMain"
                 android:layout_width="34dp"
                 android:layout_height="20dp"
                 android:background="@color/blue"
@@ -28,17 +28,17 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/sampleProfilePicture"
+                android:id="@+id/SingleActivitysampleProfilePicture"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginStart="2dp"
                 android:background="@color/blue"
-                app:layout_constraintBottom_toBottomOf="@+id/goBackMain"
-                app:layout_constraintStart_toEndOf="@+id/goBackMain"
-                app:layout_constraintTop_toTopOf="@+id/goBackMain" />
+                app:layout_constraintBottom_toBottomOf="@+id/SingleActivitygoBackMain"
+                app:layout_constraintStart_toEndOf="@+id/SingleActivitygoBackMain"
+                app:layout_constraintTop_toTopOf="@+id/SingleActivitygoBackMain" />
 
             <TextView
-                android:id="@+id/ChatActivityUsername"
+                android:id="@+id/SingleActivityChatActivityUsername"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_marginStart="6dp"
@@ -46,15 +46,15 @@
                 android:text="Gojiya Jayesh"
                 android:textColor="@color/white"
                 android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="@+id/sampleProfilePicture"
+                app:layout_constraintBottom_toBottomOf="@+id/SingleActivitysampleProfilePicture"
                 app:layout_constraintEnd_toStartOf="@+id/guideline"
-                app:layout_constraintStart_toEndOf="@+id/sampleProfilePicture"
-                app:layout_constraintTop_toTopOf="@+id/sampleProfilePicture"
+                app:layout_constraintStart_toEndOf="@+id/SingleActivitysampleProfilePicture"
+                app:layout_constraintTop_toTopOf="@+id/SingleActivitysampleProfilePicture"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintVertical_bias="0.0"/>
 
             <TextView
-                android:id="@+id/userChatStatus"
+                android:id="@+id/SingleActivityuserChatStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/blue"
@@ -62,10 +62,10 @@
                 android:textColor="@color/white"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/ChatActivityUsername"
+                app:layout_constraintEnd_toEndOf="@+id/SingleActivityChatActivityUsername"
                 app:layout_constraintHorizontal_bias="0.02"
-                app:layout_constraintStart_toStartOf="@+id/ChatActivityUsername"
-                app:layout_constraintTop_toBottomOf="@+id/ChatActivityUsername"
+                app:layout_constraintStart_toStartOf="@+id/SingleActivityChatActivityUsername"
+                app:layout_constraintTop_toBottomOf="@+id/SingleActivityChatActivityUsername"
                 app:layout_constraintVertical_bias="0.0" />
 
             <androidx.constraintlayout.widget.Guideline
@@ -76,50 +76,50 @@
                 app:layout_constraintGuide_begin="250dp" />
 
             <ImageButton
-                android:id="@+id/normalCallButton"
+                android:id="@+id/SingleActivitynormalCallButton"
                 android:layout_width="34dp"
                 android:layout_height="34dp"
                 android:background="@color/blue"
                 android:src="@drawable/call_24px"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/videoCallButton"
+                app:layout_constraintEnd_toStartOf="@+id/SingleActivityvideoCallButton"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
-                android:id="@+id/videoCallButton"
+                android:id="@+id/SingleActivityvideoCallButton"
                 android:layout_width="34dp"
                 android:layout_height="34dp"
                 android:background="@color/blue"
                 android:src="@drawable/video_outline"
-                app:layout_constraintBottom_toBottomOf="@+id/normalCallButton"
-                app:layout_constraintEnd_toStartOf="@+id/menuButton"
+                app:layout_constraintBottom_toBottomOf="@+id/SingleActivitynormalCallButton"
+                app:layout_constraintEnd_toStartOf="@+id/SingleActivitymenuButton"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/normalCallButton"
-                app:layout_constraintTop_toTopOf="@+id/normalCallButton" />
+                app:layout_constraintStart_toEndOf="@+id/SingleActivitynormalCallButton"
+                app:layout_constraintTop_toTopOf="@+id/SingleActivitynormalCallButton" />
 
             <ImageButton
-                android:id="@+id/menuButton"
+                android:id="@+id/SingleActivitymenuButton"
                 android:layout_width="34dp"
                 android:layout_height="34dp"
                 android:background="@android:color/transparent"
                 android:contentDescription="Menu Button"
                 android:src="@drawable/menu_24px"
-                app:layout_constraintBottom_toBottomOf="@+id/videoCallButton"
+                app:layout_constraintBottom_toBottomOf="@+id/SingleActivityvideoCallButton"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/videoCallButton"
-                app:layout_constraintTop_toTopOf="@+id/videoCallButton"
+                app:layout_constraintStart_toEndOf="@+id/SingleActivityvideoCallButton"
+                app:layout_constraintTop_toTopOf="@+id/SingleActivityvideoCallButton"
                 tools:ignore="TouchTargetSizeCheck" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/MessageListRecyclerView"
+        android:id="@+id/SingleActivityMessageListRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/layout2"
-        android:layout_below="@+id/toolbar" />
+        android:layout_below="@+id/SingleActivitytoolbar" />
 
     <LinearLayout
         android:id="@+id/layout2"
@@ -128,7 +128,7 @@
         android:layout_margin="6dp"
         android:layout_alignParentBottom="true">
         <EditText
-            android:id="@+id/message"
+            android:id="@+id/SingleActivitymessage"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_weight="7"
@@ -138,7 +138,7 @@
             android:paddingStart="10dp" />
 
         <ImageButton
-            android:id="@+id/sendMessage"
+            android:id="@+id/SingleActivitysendMessage"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_gravity="center"

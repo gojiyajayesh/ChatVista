@@ -15,7 +15,10 @@
         android:theme="@style/Theme.ChatVista"
         tools:targetApi="31">
         <activity
-            android:name=".UserChatProfileActivity"
+            android:name=".SearchUserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UserNameActivity"
             android:exported="false" />
         <activity
             android:name=".IndividualChatActivity"

@@ -1,4 +1,4 @@
-package com.gojiyajayesh.chatvista.adepters;
+package com.gojiyajayesh.chatvista.adapters;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -28,14 +28,15 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class UserChatListAdepter extends RecyclerView.Adapter<UserChatListAdepter.UserHolder> {
+public class UserChatListAdapter extends RecyclerView.Adapter<UserChatListAdapter.UserHolder> {
     private ArrayList<Users> list;
     private Context context;
-    SimpleDateFormat sdf;
+    private SimpleDateFormat sdf;
 
-    public UserChatListAdepter(ArrayList<Users> list, Context context) {
+    public UserChatListAdapter(ArrayList<Users> list, Context context) {
         this.list = list;
         this.context = context;
+        this.sdf = new SimpleDateFormat("hh:mm a");
     }
 
     @NonNull
@@ -45,55 +46,55 @@ public class UserChatListAdepter extends RecyclerView.Adapter<UserChatListAdepte
         View view = inflater.inflate(R.layout.user_list_sample_layout, parent, false);
         return new UserHolder(view);
     }
+
     @Override
     public void onBindViewHolder(@NonNull UserHolder holder, int position) {
-        Users users=list.get(position);
+        Users users = list.get(position);
         FirebaseDatabase.getInstance().getReference().child("Chats")
-                        .child(FirebaseAuth.getInstance().getUid()+users.getUserId())
-                                .orderByChild("timestamp").limitToLast(1)
-                        .addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                if(snapshot.hasChildren())
-                                {
-                                    for(DataSnapshot i:snapshot.getChildren())
-                                    {
-                                        holder.lastMessage.setText(i.child("message").getValue(String.class));
-                                        sdf = new SimpleDateFormat("hh:mm a");
-                                        String time = sdf.format(new Date(i.child("messageTime").getValue(Long.class)));
-                                        holder.messageArrivalTime.setText(time);
-                                    }
-                                }
+                .child(FirebaseAuth.getInstance().getUid() + users.getUserId())
+                .orderByChild("timestamp").limitToLast(1)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.hasChildren()) {
+                            for (DataSnapshot i : snapshot.getChildren()) {
+                                holder.lastMessage.setText(i.child("message").getValue(String.class));
+                                String time = sdf.format(new Date(i.child("messageTime").getValue(Long.class)));
+                                holder.messageArrivalTime.setText(time);
                             }
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
+                        }
+                    }
 
-                            }
-                        });
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
         holder.username.setText(users.getUsername());
-        Picasso.get().load(users.getProfileId()).placeholder(R.drawable.dwarkadhish).into(holder.profilePicture);
+        Picasso.get().load(users.getProfileId()).placeholder(R.drawable.default_profile_picture).into(holder.profilePicture);
         holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(context, IndividualChatActivity.class);
-            intent.putExtra("UserId",users.getUserId());
+            intent.putExtra("UserId", users.getUserId());
             intent.putExtra("Username", users.getUsername());
             intent.putExtra("ProfilePicture", users.getProfileId());
             context.startActivity(intent);
         });
+
         holder.profilePicture.setOnClickListener(view -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setTitle(users.getUsername());
             LayoutInflater inflater = LayoutInflater.from(holder.itemView.getContext());
             View dialogView = inflater.inflate(R.layout.profile_picture_view, null);
             ImageView profilePictureClick = dialogView.findViewById(R.id.profilePictureClick);
-            Picasso.get().load(users.getProfileId()).placeholder(R.drawable.dwarkadhish).into(profilePictureClick);
+            Picasso.get().load(users.getProfileId()).placeholder(R.drawable.default_profile_picture).into(profilePictureClick);
             builder.setView(dialogView);
             builder.setPositiveButton("OK", (dialog, which) -> {
                 dialog.dismiss();
             });
-            builder.setNegativeButton("Update",(dialog, which) -> {
-                AndroidUtils.customToast(context,"Update now", Toast.LENGTH_LONG);
+            builder.setNegativeButton("Update", (dialog, which) -> {
+                AndroidUtils.customToast(context, "Update now", Toast.LENGTH_LONG);
             });
-            builder.setNeutralButton("Exit" ,(dialog, which) -> {
+            builder.setNeutralButton("Exit", (dialog, which) -> {
                 dialog.dismiss();
             });
             AlertDialog dialog = builder.create();

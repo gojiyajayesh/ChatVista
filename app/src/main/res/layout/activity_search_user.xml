@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SearchUserActivity">
+<androidx.appcompat.widget.Toolbar
+    android:id="@+id/toolbarSearchActivity"
+    android:layout_width="match_parent"
+    android:background="@color/blue"
+    android:gravity="center_vertical"
+    android:layout_height="44dp">
+    <ImageButton
+        android:id="@+id/search_backBtn"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/arrow_left"
+        android:background="@color/blue"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search Users"
+        android:layout_marginStart="25dp"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:background="@color/blue"
+        />
+</androidx.appcompat.widget.Toolbar>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:id="@+id/layout"
+    android:layout_marginTop="8dp"
+    android:layout_below="@+id/toolbarSearchActivity"
+    android:layout_height="wrap_content">
+    <EditText
+        android:id="@+id/userSearchInput"
+        android:layout_width="0dp"
+        android:layout_weight="17"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:hint="Search"
+        android:textColor="@color/light_blue"
+        android:textSize="20sp"
+        android:paddingStart="12dp"
+        android:paddingEnd="8dp"
+        android:background="@drawable/input_background" />
+    <ImageButton
+        android:id="@+id/FindUserBtn"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:elevation="2dp"
+        android:background="@drawable/circle_btn_background"
+        android:src="@drawable/search_icon"
+        />
+</LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout"
+        android:layout_marginTop="8dp"
+        android:id="@+id/searchRecyclerView"
+        />
+</RelativeLayout>

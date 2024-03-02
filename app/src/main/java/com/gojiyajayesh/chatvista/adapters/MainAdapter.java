@@ -1,4 +1,4 @@
-package com.gojiyajayesh.chatvista.adepters;
+package com.gojiyajayesh.chatvista.adapters;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -10,9 +10,9 @@ import com.gojiyajayesh.chatvista.fragments.CallsListFragment;
 import com.gojiyajayesh.chatvista.fragments.ChatsListFragment;
 import com.gojiyajayesh.chatvista.fragments.StatusesListFragment;
 
-public class MainAdepter extends FragmentStateAdapter {
+public class MainAdapter extends FragmentStateAdapter {
 
-    public MainAdepter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
+    public MainAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
         super(fragmentManager, lifecycle);
     }
 

@@ -1,74 +1,101 @@
 package com.gojiyajayesh.chatvista.models;
 
 public class Users {
-    String UserId, Username,LastMessage,ProfileId,Password,Email;
-    Long LastMessageTime;
-    public Long getLastMessageTime() {
-        return LastMessageTime;
+    private String userId;
+    private String username;
+    private String lastMessage;
+    private String profileId;
+    private String password;
+    private String phoneOrEmail;
+    private String fullName;
+    private Long lastMessageTime;
+
+    public Users(String phoneOrEmail, String password, String profileId, String username, String fullName, String userId) {
+        this.phoneOrEmail = phoneOrEmail;
+        this.password = password;
+        this.profileId = profileId;
+        this.username = username;
+        this.fullName = fullName;
+        this.userId = userId;
     }
 
     public Users(String lastMessage, Long lastMessageTime) {
-        LastMessage = lastMessage;
-        LastMessageTime = lastMessageTime;
+        this.lastMessage = lastMessage;
+        this.lastMessageTime = lastMessageTime;
+    }
+
+    public Users(String userId, String username, String profileId, String email, String password) {
+        this.profileId = profileId;
+        this.password = password;
+        this.phoneOrEmail = email;
+        this.username = username;
+        this.userId = userId;
+    }
+
+    public Users() {
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public Long getLastMessageTime() {
+        return lastMessageTime;
     }
 
     public void setLastMessageTime(Long lastMessageTime) {
-        LastMessageTime = lastMessageTime;
+        this.lastMessageTime = lastMessageTime;
     }
 
-    public Users(String UserId, String username, String profileId, String email, String password) {
-        ProfileId = profileId;
-        Password = password;
-        Email = email;
-        Username =username;
-       this.UserId=UserId;
-    }
-    public Users(){}
     public String getUserId() {
-        return UserId;
+        return userId;
     }
 
     public void setUserId(String userId) {
-        UserId = userId;
+        this.userId = userId;
     }
 
     public String getUsername() {
-        return Username;
+        return username;
     }
 
     public void setUsername(String username) {
-        Username = username;
+        this.username = username;
     }
 
     public String getLastMessage() {
-        return LastMessage;
+        return lastMessage;
     }
 
     public void setLastMessage(String lastMessage) {
-        LastMessage = lastMessage;
+        this.lastMessage = lastMessage;
     }
 
     public String getProfileId() {
-        return ProfileId;
+        return profileId;
     }
 
     public void setProfileId(String profileId) {
-        ProfileId = profileId;
+        this.profileId = profileId;
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
     public void setPassword(String password) {
-        Password = password;
+        this.password = password;
     }
 
-    public String getEmail() {
-        return Email;
+    public String getPhoneOrEmail() {
+        return phoneOrEmail;
     }
 
-    public void setEmail(String email) {
-        Email = email;
+    public void setPhoneOrEmail(String phoneOrEmail) {
+        this.phoneOrEmail = phoneOrEmail;
     }
 }

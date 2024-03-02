@@ -1,5 +1,8 @@
 package com.gojiyajayesh.chatvista;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -12,10 +15,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
+import com.gojiyajayesh.chatvista.models.Users;
 import com.gojiyajayesh.chatvista.utils.AndroidUtils;
+import com.gojiyajayesh.chatvista.utils.FirebaseUtils;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
@@ -28,43 +30,49 @@ import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
 public class OtpVerifyActivity extends AppCompatActivity {
-    TextView PhoneNumberTextView;
-    FirebaseAuth mAuth;
-    String phoneNumber;
-    TextView resendOtp, resendTime;
-    Button VerifyBtn;
-    PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
-    PhoneAuthProvider.ForceResendingToken mResendToken;
-    EditText[] otpEditTexts;
-    ProgressBar progressBar;
-    private String mVerificationId, otpCode;
+    private TextView phoneNumberTextView, resendOtp, resendTime;
+    private FirebaseAuth mAuth;
+    private String phoneNumber, otpCode, mVerificationId;
+    private EditText[] otpEditTexts;
+    private Button verifyBtn;
+    private ProgressBar progressBar;
     private long timeoutSeconds = 60L;
+    private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
+    private PhoneAuthProvider.ForceResendingToken mResendToken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp_verify);
+
+        // Initialize views
         initialization();
-        VerifyBtn.setOnClickListener(view -> {
+
+        // Verify button click listener
+        verifyBtn.setOnClickListener(view -> {
             inProgress(true);
             otpCode = getOtp();
             PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, otpCode);
             signInWithPhoneAuthCredential(credential);
         });
-        resendOtp.setOnClickListener(v -> {
-            sendOtp(true);
-        });
+
+        // Resend OTP click listener
+        resendOtp.setOnClickListener(v -> sendOtp(true));
+
+        // Listen for changes in OTP input fields
         otpInputChanger();
+
+        // Send OTP initially
         sendOtp(false);
     }
 
-    void otpInputChanger() {
+    // Method to handle changes in OTP input fields
+    private void otpInputChanger() {
         for (int i = 0; i < otpEditTexts.length; i++) {
             final int index = i;
             otpEditTexts[i].addTextChangedListener(new TextWatcher() {
                 @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                }
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -74,8 +82,7 @@ public class OtpVerifyActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void afterTextChanged(Editable s) {
-                }
+                public void afterTextChanged(Editable s) {}
             });
             otpEditTexts[i].setOnKeyListener((v, keyCode, event) -> {
                 if (keyCode == KeyEvent.KEYCODE_DEL && event.getAction() == KeyEvent.ACTION_DOWN && index > 0 && otpEditTexts[index].getText().toString().isEmpty()) {
@@ -87,30 +94,28 @@ public class OtpVerifyActivity extends AppCompatActivity {
         }
     }
 
-
-    void initialization() {
-        PhoneNumberTextView = findViewById(R.id.phone_txt_view);
+    // Method to initialize views
+    private void initialization() {
+        phoneNumberTextView = findViewById(R.id.phone_txt_view);
         phoneNumber = getIntent().getStringExtra("mobileNumber");
-        PhoneNumberTextView.setText(phoneNumber);
+        phoneNumberTextView.setText(phoneNumber);
         mAuth = FirebaseAuth.getInstance();
-        VerifyBtn = findViewById(R.id.verify_btn);
-        otpEditTexts = new EditText[]{findViewById(R.id.otp_1), findViewById(R.id.otp_2), findViewById(R.id.otp_3), findViewById(R.id.otp_4), findViewById(R.id.otp_5), findViewById(R.id.otp_6)};
+        verifyBtn = findViewById(R.id.verify_btn);
+        otpEditTexts = new EditText[]{findViewById(R.id.otp_1), findViewById(R.id.otp_2), findViewById(R.id.otp_3),
+                findViewById(R.id.otp_4), findViewById(R.id.otp_5), findViewById(R.id.otp_6)};
         progressBar = findViewById(R.id.progress_bar_otp);
         resendOtp = findViewById(R.id.resend_otp_txt);
         resendTime = findViewById(R.id.resendTime);
     }
 
+    // Method to handle progress visibility
     private void inProgress(boolean isProgress) {
-        if (isProgress) {
-            progressBar.setVisibility(View.VISIBLE);
-            VerifyBtn.setVisibility(View.INVISIBLE);
-        } else {
-            progressBar.setVisibility(View.INVISIBLE);
-            VerifyBtn.setVisibility(View.VISIBLE);
-        }
+        progressBar.setVisibility(isProgress ? View.VISIBLE : View.INVISIBLE);
+        verifyBtn.setVisibility(isProgress ? View.INVISIBLE : View.VISIBLE);
     }
 
-    String getOtp() {
+    // Method to get entered OTP
+    private String getOtp() {
         StringBuilder sb = new StringBuilder();
         for (EditText i : otpEditTexts) {
             sb.append(i.getText().toString().trim());
@@ -118,7 +123,8 @@ public class OtpVerifyActivity extends AppCompatActivity {
         return sb.toString().trim();
     }
 
-    void startResendTimer() {
+    // Method to start timer for OTP resend
+    private void startResendTimer() {
         resendOtp.setEnabled(false);
         resendOtp.setText("Resend OTP in");
         Timer timer = new Timer();
@@ -127,7 +133,7 @@ public class OtpVerifyActivity extends AppCompatActivity {
             public void run() {
                 timeoutSeconds--;
                 runOnUiThread(() -> {
-                    resendTime.setText("( 00:" + String.format("%02d", timeoutSeconds) + " )"); // Format seconds to display leading zero
+                    resendTime.setText("( 00:" + String.format("%02d", timeoutSeconds) + " )");
                 });
                 if (timeoutSeconds <= 0) {
                     timer.cancel();
@@ -141,7 +147,7 @@ public class OtpVerifyActivity extends AppCompatActivity {
         }, 0, 1000);
     }
 
-
+    // Method to send OTP
     private void sendOtp(boolean isRend) {
         startResendTimer();
         inProgress(true);
@@ -175,12 +181,20 @@ public class OtpVerifyActivity extends AppCompatActivity {
         PhoneAuthProvider.verifyPhoneNumber(options);
     }
 
+    // Method to handle phone authentication
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
         mAuth.signInWithCredential(credential).addOnCompleteListener(this, task -> {
             if (task.isSuccessful()) {
                 inProgress(false);
                 AndroidUtils.customToast(getApplicationContext(), "Sign In Successfully", Toast.LENGTH_LONG);
-                startActivity(new Intent(OtpVerifyActivity.this, MainActivity.class));
+                Intent intent = new Intent(OtpVerifyActivity.this, UserNameActivity.class);
+                Users user = new Users();
+                user.setUserId(FirebaseUtils.currentUserId());
+                user.setPhoneOrEmail(phoneNumber);
+                user.setPassword("phoneLogin");
+                AndroidUtils.setPassedIntentData(intent, user);
+                startActivity(intent);
+                finish();
             } else {
                 inProgress(false);
                 AndroidUtils.customToast(getApplicationContext(), "Verification Failed!", Toast.LENGTH_LONG);

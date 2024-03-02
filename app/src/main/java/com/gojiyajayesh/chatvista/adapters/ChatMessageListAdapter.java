@@ -1,4 +1,4 @@
-package com.gojiyajayesh.chatvista.adepters;
+package com.gojiyajayesh.chatvista.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -19,14 +19,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
-public class ChatMessageListAdepter extends RecyclerView.Adapter {
+public class ChatMessageListAdapter extends RecyclerView.Adapter {
     private final int SENDER_FLAG = 1;
     private final int RECEIVER_FLAG = 2;
     SimpleDateFormat sdf;
     ArrayList<UserChatMessageModel> list;
     Context context;
 
-    public ChatMessageListAdepter(ArrayList<UserChatMessageModel> list, Context context) {
+    public ChatMessageListAdapter(ArrayList<UserChatMessageModel> list, Context context) {
         this.list = list;
         this.context = context;
     }
@@ -83,7 +83,6 @@ public class ChatMessageListAdepter extends RecyclerView.Adapter {
 
     public static class ReceiverViewHolder extends RecyclerView.ViewHolder {
         TextView Message, Time;
-
         public ReceiverViewHolder(@NonNull View itemView) {
             super(itemView);
             Message = itemView.findViewById(R.id.receiverMessageText);
