@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "561019311089-5ko2u50v5fha27arsltnbavkb3cj1ql9.apps.googleusercontent.com",
+          "client_id": "561019311089-ceuuor0hsks4eg02144f72ihrld07ddt.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.gojiyajayesh.chatvista",
-            "certificate_hash": "7a38b47a5c83452fc30ac3d33fbb435b246648e9"
+            "certificate_hash": "89498fed383e4ec3133633a73539a64d331748ba"
           }
         },
         {

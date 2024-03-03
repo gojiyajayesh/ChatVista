@@ -1,18 +1,23 @@
 package com.gojiyajayesh.chatvista;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
@@ -21,18 +26,25 @@ import com.gojiyajayesh.chatvista.models.UserDetails;
 import com.gojiyajayesh.chatvista.models.Users;
 import com.gojiyajayesh.chatvista.utils.AndroidUtils;
 import com.gojiyajayesh.chatvista.utils.FirebaseUtils;
+import com.google.android.gms.auth.api.signin.internal.Storage;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
 
+import io.grpc.Context;
+
 public class UserNameActivity extends AppCompatActivity {
     Button ContinueBtn;
     EditText Username, FullName;
-    ImageView ProfilePic;
+    ImageView ProfilePic,UpdateProfilePic;
     TextView UserNameUnique;
     ImageView Icon;
     Users user;
@@ -42,6 +54,10 @@ public class UserNameActivity extends AppCompatActivity {
     String Uid;
     String ProfileId;
     boolean[] isExist;
+    FirebaseStorage storage;
+    FirebaseDatabase database;
+    FirebaseFirestore firestore;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +68,14 @@ public class UserNameActivity extends AppCompatActivity {
         Username = findViewById(R.id.DetailPageUserIdentifyTextInput);
         FullName = findViewById(R.id.DetailPageFullNameTextInput);
         ProfilePic = findViewById(R.id.UserNameActivityProfilePic);
+        UpdateProfilePic = findViewById(R.id.UpdateProfilePictureUserNameActivity);
         UserNameUnique = findViewById(R.id.uniqueUsername);
         Icon=findViewById(R.id.uniqueUsernameicon);
         condition = findViewById(R.id.temsConditionCheckbox);
+        progressBar=findViewById(R.id.UserNameActivityProgressBar);
+        storage=FirebaseStorage.getInstance();
+        firestore =FirebaseFirestore.getInstance();
+        database=FirebaseDatabase.getInstance();
         condition.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 showTermsAndConditionsDialog();
@@ -68,6 +89,29 @@ public class UserNameActivity extends AppCompatActivity {
         ProfileId = user2.getProfileId();
         Picasso.get().load(user2.getProfileId()).placeholder(R.drawable.default_profile_picture).into(ProfilePic);
         Password=user2.getPassword();
+        FullName.setText(user2.getUsername());
+        UpdateProfilePic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent();
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/*");
+                startActivityForResult(intent,63);
+            }
+        });
+        ProfilePic.setOnClickListener(view -> {
+            android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+            builder.setTitle(user2.getUsername());
+            LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
+            View dialogView = inflater.inflate(R.layout.profile_picture_view, null);
+            ImageView profilePictureClick = dialogView.findViewById(R.id.profilePictureClick);
+            Picasso.get().load(ProfileId).placeholder(R.drawable.default_profile_picture).into(profilePictureClick);
+            builder.setView(dialogView);
+            builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
+            builder.setNegativeButton("Update", (dialog, which) -> AndroidUtils.customToast(this, "Update now", Toast.LENGTH_LONG));
+            android.app.AlertDialog dialog = builder.create();
+            dialog.show();
+        });
         getUsername();
         ContinueBtn.setOnClickListener(view -> {
             if (!isExist[0]) setUsername();
@@ -107,6 +151,32 @@ public class UserNameActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(data.getData()!=null)
+        {
+            inProgress(true);
+           Uri photoPath=data.getData();
+           ProfilePic.setImageURI(photoPath);
+
+           final StorageReference reference= storage.getReference().child("UserProfilePicture's").child(FirebaseUtils.currentUserId());
+           reference.putFile(photoPath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+               @Override
+               public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                   reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                       @Override
+                       public void onSuccess(Uri uri) {
+                           ProfileId=uri.toString();
+                           inProgress(false);
+                           AndroidUtils.customToast(getApplicationContext(),"Profile Photo Updated",1);
+                       }
+                   });
+               }
+           });
+        }
+    }
+
     Task<Boolean> checkUsernameAvailability(String username) {
         return FirebaseFirestore.getInstance().collection("UserDetails").whereEqualTo("username", username).get().continueWith(task -> {
             if (task.isSuccessful()) {
@@ -144,7 +214,10 @@ public class UserNameActivity extends AppCompatActivity {
             }
         });
     }
-
+    private void inProgress(boolean isProgress) {
+        progressBar.setVisibility(isProgress ? View.VISIBLE : View.INVISIBLE);
+        ContinueBtn.setVisibility(isProgress ? View.INVISIBLE : View.VISIBLE);
+    }
     void getUsername() {
         FirebaseUtils.currentUserDetail().get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {

@@ -111,7 +111,7 @@ public class IndividualChatActivity extends AppCompatActivity {
             String text = message.getText().toString().trim();
             if (!text.isEmpty()) {
                 long time = new Date().getTime();
-                UserChatMessageModel dataStore = new UserChatMessageModel(text, senderId, time);
+                UserChatMessageModel dataStore = new UserChatMessageModel(text, senderId,receiverId, time);
                 database.getReference().child("Chats").child(senderToReceiverNode).push().setValue(dataStore).addOnSuccessListener(aVoid -> {
                     int length = senderToReceiverNode.length();
                     int mid = length / 2;

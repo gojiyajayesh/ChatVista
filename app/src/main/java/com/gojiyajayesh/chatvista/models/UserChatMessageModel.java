@@ -4,6 +4,15 @@ public class UserChatMessageModel {
     private String message;
     private String userId;
     private Long messageTime;
+    private String receiverId;
+
+    public String getReceiverId() {
+        return receiverId;
+    }
+
+    public void setReceiverId(String receiverId) {
+        this.receiverId = receiverId;
+    }
 
     public UserChatMessageModel() {
     }
@@ -13,10 +22,11 @@ public class UserChatMessageModel {
         this.userId = userId;
     }
 
-    public UserChatMessageModel(String message, String userId, Long messageTime) {
+    public UserChatMessageModel(String message, String userId,String receiverId, Long messageTime) {
         this.message = message;
         this.userId = userId;
         this.messageTime = messageTime;
+        this.receiverId=receiverId;
     }
 
     public String getMessage() {

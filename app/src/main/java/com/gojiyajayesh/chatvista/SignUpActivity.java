@@ -143,13 +143,20 @@ public class SignUpActivity extends AppCompatActivity {
             mAuth.signInWithCredential(GoogleAuthProvider.getCredential(idToken, null)).addOnCompleteListener(this, task -> {
                 if (task.isSuccessful()) {
                     FirebaseUser firebaseUser = task.getResult().getUser();
+                    assert firebaseUser != null;
                     String uid = firebaseUser.getUid();
                     String email = firebaseUser.getEmail();
-                    String username = firebaseUser.getDisplayName();
+                    String displayName=firebaseUser.getDisplayName();
                     String profileId = firebaseUser.getPhotoUrl() != null ? firebaseUser.getPhotoUrl().toString() : null;
-                    createUserInDatabase(uid, username, email, profileId);
+                    String password = "googleLogin";
                     Intent intent = new Intent(SignUpActivity.this, UserNameActivity.class);
-                    intent.putExtra("EmailOrPhone", email);
+                    Users user = new Users();
+                    user.setUserId(uid);
+                    user.setPhoneOrEmail(email);
+                    user.setPassword(password);
+                    user.setProfileId(profileId);
+                    user.setUsername(displayName);
+                    AndroidUtils.setPassedIntentData(intent, user);
                     startActivity(intent);
                     finish();
                 } else {

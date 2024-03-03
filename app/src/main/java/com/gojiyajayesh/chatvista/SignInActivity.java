@@ -83,6 +83,7 @@ public class SignInActivity extends AppCompatActivity {
         forgotPasswordTextView.setOnClickListener(v -> startActivity(new Intent(SignInActivity.this, ForgotPasswordActivity.class)));
         phoneSignInButton.setOnClickListener(v -> {
             Intent intent = new Intent(SignInActivity.this, PhoneLogInActivity.class);
+            startActivity(intent);
             finish();
         });
         googleSignInButton.setOnClickListener(v -> signInWithGoogle());
@@ -204,6 +205,7 @@ public class SignInActivity extends AppCompatActivity {
                 assert firebaseUser != null;
                 String uid = firebaseUser.getUid();
                 String email = firebaseUser.getEmail();
+                String displayName=firebaseUser.getDisplayName();
                 String profileId = firebaseUser.getPhotoUrl() != null ? firebaseUser.getPhotoUrl().toString() : null;
                 String password = "googleLogin";
                 Intent intent = new Intent(SignInActivity.this, UserNameActivity.class);
@@ -212,6 +214,7 @@ public class SignInActivity extends AppCompatActivity {
                 user.setPhoneOrEmail(email);
                 user.setPassword(password);
                 user.setProfileId(profileId);
+                user.setUsername(displayName);
                 AndroidUtils.setPassedIntentData(intent, user);
                 startActivity(intent);
                 finish();

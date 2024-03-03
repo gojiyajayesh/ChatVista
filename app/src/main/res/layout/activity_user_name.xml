@@ -6,12 +6,14 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".UserNameActivity">
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/verticalGuideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.08" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/verticalGuideline2"
         android:layout_width="wrap_content"
@@ -19,23 +21,25 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.92" />
 
-    <ImageView
-        android:id="@+id/signInPageIcon"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:layout_marginTop="24dp"
-        android:contentDescription="@string/logo_for_chatapplication"
-        android:src="@drawable/main_logo"
-        app:layout_constraintEnd_toStartOf="@+id/verticalGuideline2"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="@+id/verticalGuideline"
-        app:layout_constraintTop_toTopOf="parent" />
+    <!--    <ImageView-->
+    <!--        android:id="@+id/signInPageIcon"-->
+    <!--        android:layout_width="130dp"-->
+    <!--        android:layout_height="130dp"-->
+    <!--        android:layout_marginTop="24dp"-->
+    <!--        android:contentDescription="@string/logo_for_chatapplication"-->
+    <!--        android:src="@drawable/main_logo"-->
+    <!--        app:layout_constraintEnd_toStartOf="@+id/verticalGuideline2"-->
+    <!--        app:layout_constraintHorizontal_bias="0.495"-->
+    <!--        app:layout_constraintStart_toStartOf="@+id/verticalGuideline"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <!--        app:layout_constraintTop_toBottomOf="@+id/signInPageIcon" />-->
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="40dp"
         android:gravity="center"
         android:text="Please Enter Your Detail"
         android:textColor="@color/black"
@@ -44,28 +48,53 @@
         app:layout_constraintEnd_toStartOf="@+id/verticalGuideline2"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/verticalGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/signInPageIcon" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/UserNameActivityProfilePic"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+    <LinearLayout
+        android:id="@+id/layoutImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:gravity="center"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toStartOf="@+id/verticalGuideline2"
         app:layout_constraintStart_toStartOf="@+id/verticalGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/UserNameActivityProfilePic"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:src="@drawable/default_profile_icon"
+            app:layout_constraintEnd_toStartOf="@+id/verticalGuideline2"
+            app:layout_constraintStart_toStartOf="@+id/verticalGuideline"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/UpdateProfilePictureUserNameActivity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="-38dp"
+            android:background="@drawable/circle_btn_background"
+            android:src="@drawable/plus_circle"
+            android:tint="@color/white" />
+    </LinearLayout>
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/DetailPageFullNameTextInputLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:hint="Full name"
+        android:layout_marginTop="10dp"
         app:boxStrokeColor="@color/royalBlue"
         app:layout_constraintEnd_toStartOf="@+id/verticalGuideline2"
         app:layout_constraintStart_toStartOf="@+id/verticalGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/UserNameActivityProfilePic">
+        app:layout_constraintTop_toBottomOf="@+id/layoutImage">
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/DetailPageFullNameTextInput"
             android:layout_width="match_parent"
@@ -83,6 +112,7 @@
         app:layout_constraintEnd_toStartOf="@+id/verticalGuideline2"
         app:layout_constraintStart_toStartOf="@+id/verticalGuideline"
         app:layout_constraintTop_toBottomOf="@+id/DetailPageFullNameTextInputLayout">
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/DetailPageUserIdentifyTextInput"
             android:layout_width="match_parent"
@@ -93,24 +123,24 @@
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="0dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginStart="2dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="6dp"
         app:layout_constraintEnd_toStartOf="@+id/verticalGuideline2"
         app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="@+id/verticalGuideline"
         app:layout_constraintTop_toBottomOf="@+id/DetailPageUserIdentifyTextInputLayout">
+
         <TextView
             android:id="@+id/uniqueUsername"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
+            android:layout_height="wrap_content" />
+
         <ImageView
-            android:layout_marginStart="3dp"
             android:id="@+id/uniqueUsernameicon"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            />
+            android:layout_marginStart="3dp" />
     </LinearLayout>
 
     <CheckBox
@@ -125,6 +155,15 @@
         app:layout_constraintStart_toStartOf="@+id/verticalGuideline"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
+    <ProgressBar
+        android:id="@+id/UserNameActivityProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/blue"
+        app:layout_constraintBottom_toBottomOf="@+id/continueBtn"
+        app:layout_constraintEnd_toStartOf="@+id/verticalGuideline2"
+        app:layout_constraintStart_toStartOf="@+id/verticalGuideline"
+        app:layout_constraintTop_toTopOf="@+id/continueBtn" />
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/continueBtn"
         android:layout_width="0dp"
@@ -136,8 +175,8 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/verticalGuideline2"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/verticalGuideline"
         app:layout_constraintTop_toBottomOf="@+id/temsConditionCheckbox"
-        app:layout_constraintVertical_bias="0.25" />
+        app:layout_constraintVertical_bias="0.3" />
 </androidx.constraintlayout.widget.ConstraintLayout>

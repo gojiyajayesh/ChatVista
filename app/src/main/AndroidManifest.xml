@@ -8,9 +8,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/main_logo_2"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/main_logo_2"
         android:supportsRtl="true"
         android:theme="@style/Theme.ChatVista"
         tools:targetApi="31">
@@ -33,6 +33,7 @@
             android:name=".PhoneLogInActivity"
             android:exported="false" />
         <activity
+            android:theme="@style/MyMainTheme"
             android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
