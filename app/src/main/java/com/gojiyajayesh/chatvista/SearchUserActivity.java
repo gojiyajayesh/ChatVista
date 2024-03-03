@@ -16,9 +16,6 @@ import com.gojiyajayesh.chatvista.models.Users;
 import com.gojiyajayesh.chatvista.utils.FirebaseUtils;
 import com.google.firebase.firestore.Query;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class SearchUserActivity extends AppCompatActivity {
     private ImageButton backButton, searchButton;
     private EditText searchInput;
@@ -42,6 +39,7 @@ public class SearchUserActivity extends AppCompatActivity {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String searchInputText = searchInput.getText().toString().trim();
@@ -51,6 +49,7 @@ public class SearchUserActivity extends AppCompatActivity {
                     clearSearchResults();
                 }
             }
+
             @Override
             public void afterTextChanged(Editable s) {
             }
@@ -63,6 +62,7 @@ public class SearchUserActivity extends AppCompatActivity {
     }
 
     private void searchRecyclerView(String searchInputText) {
+        recyclerView.setAdapter(null);
         Query queryByUsername = FirebaseUtils.allUserCollectionReference().orderBy("username").startAt(searchInputText.toLowerCase()).endAt(searchInputText.toLowerCase() + "\uf8ff");
         FirestoreRecyclerOptions<Users> options = new FirestoreRecyclerOptions.Builder<Users>().setQuery(queryByUsername, Users.class).build();
         adapter = new UserSearchAdapter(options, getApplicationContext());
@@ -98,7 +98,8 @@ public class SearchUserActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if (adapter != null) {
-            adapter.startListening();
+            String searchInputText = searchInput.getText().toString().trim();
+            searchRecyclerView(searchInputText);
         }
     }
 }
