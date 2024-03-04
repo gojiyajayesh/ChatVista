@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.gojiyajayesh.chatvista.IndividualChatActivity;
 import com.gojiyajayesh.chatvista.R;
 import com.gojiyajayesh.chatvista.models.Users;
-import com.gojiyajayesh.chatvista.utils.AndroidUtils;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,9 +27,9 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class UserChatListAdapter extends RecyclerView.Adapter<UserChatListAdapter.UserHolder> {
-    private ArrayList<Users> list;
-    private Context context;
-    private SimpleDateFormat sdf;
+    private final ArrayList<Users> list;
+    private final Context context;
+    private final SimpleDateFormat sdf;
 
     public UserChatListAdapter(ArrayList<Users> list, Context context) {
         this.list = list;
@@ -50,33 +48,31 @@ public class UserChatListAdapter extends RecyclerView.Adapter<UserChatListAdapte
     @Override
     public void onBindViewHolder(@NonNull UserHolder holder, int position) {
         Users users = list.get(position);
-        FirebaseDatabase.getInstance().getReference().child("Chats")
-                .child(FirebaseAuth.getInstance().getUid() + users.getUserId())
-                .orderByChild("timestamp").limitToLast(1)
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (snapshot.hasChildren()) {
-                            for (DataSnapshot i : snapshot.getChildren()) {
-                                holder.lastMessage.setText(i.child("message").getValue(String.class));
-                                String time = sdf.format(new Date(i.child("messageTime").getValue(Long.class)));
-                                holder.messageArrivalTime.setText(time);
-                            }
-                        }
+        FirebaseDatabase.getInstance().getReference().child("Chats").child(FirebaseAuth.getInstance().getUid() + users.getUserId()).orderByChild("timestamp").limitToLast(1).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.hasChildren()) {
+                    for (DataSnapshot i : snapshot.getChildren()) {
+                        holder.lastMessage.setText(i.child("message").getValue(String.class));
+                        String time = sdf.format(new Date(i.child("messageTime").getValue(Long.class)));
+                        holder.messageArrivalTime.setText(time);
                     }
+                }
+            }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
-                    }
-                });
-        holder.username.setText(users.getUsername());
+            }
+        });
+        holder.username.setText(users.getFullName());
         Picasso.get().load(users.getProfileId()).placeholder(R.drawable.default_profile_picture).into(holder.profilePicture);
         holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(context, IndividualChatActivity.class);
             intent.putExtra("UserId", users.getUserId());
             intent.putExtra("Username", users.getUsername());
             intent.putExtra("ProfilePicture", users.getProfileId());
+            intent.putExtra("fullName",users.getFullName());
             context.startActivity(intent);
         });
 
@@ -89,12 +85,6 @@ public class UserChatListAdapter extends RecyclerView.Adapter<UserChatListAdapte
             Picasso.get().load(users.getProfileId()).placeholder(R.drawable.default_profile_picture).into(profilePictureClick);
             builder.setView(dialogView);
             builder.setPositiveButton("OK", (dialog, which) -> {
-                dialog.dismiss();
-            });
-            builder.setNegativeButton("Update", (dialog, which) -> {
-                AndroidUtils.customToast(context, "Update now", Toast.LENGTH_LONG);
-            });
-            builder.setNeutralButton("Exit", (dialog, which) -> {
                 dialog.dismiss();
             });
             AlertDialog dialog = builder.create();

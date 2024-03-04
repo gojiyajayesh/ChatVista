@@ -29,18 +29,24 @@
     <string name="verification_heading">Verification</string>
     <string name="sign_up_page_terms_conditon">Agree with terms &amp; condition</string>
     <string name="terms_and_conditions">
-            <![CDATA[
-            <h1>Terms and Conditions</h1>
-            <p>Welcome to our chat application!</p>
-            <p>By using this application, you agree to abide by the following terms and conditions:</p>
-            <ul>
-                <li>You must be at least 13 years old to use this application.</li>
-                <li>You agree to use this application responsibly and respect other users.</li>
-                <li>Your account may be suspended or terminated if you violate these terms.</li>
-            </ul>
-            <p>Thank you for using our chat application!</p>
-            ]]>
-        </string>
+    <![CDATA[
+    <h1>Terms and Conditions</h1>
+    <p>Welcome to our ChatVista application!</p>
+    <p>By using this application, you agree to abide by the following terms and conditions:</p>
+    <ol>
+        <li>You must be at least 18 years old to use this application.</li>
+        <li>Use this application responsibly and refrain from any unlawful activities.</li>
+        <li>You are solely responsible for the content you post or transmit through the application.</li>
+        <li>We reserve the right to suspend or terminate your account for any violation of these terms.</li>
+        <li>We may collect and use your personal information as described in our Privacy Policy.</li>
+        <li>We may modify these terms at any time, so please review them periodically.</li>
+        <li>By using this application, you consent to receiving communications from us, including promotional messages.</li>
+        <li>This application may use cookies to enhance your user experience.</li>
+    </ol>
+    <p>If you have any questions or concerns, please <a href="mailto:jayeshgojiya9912@gmail.com">contact us</a>.</p>
+    <p>Thank you for using our chat application!</p>
+    ]]>
+</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="profilephoto">ProfilePhoto</string>

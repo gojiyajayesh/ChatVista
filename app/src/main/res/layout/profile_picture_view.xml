@@ -6,7 +6,7 @@
     android:elevation="25dp"
     android:padding="10dp"
     android:gravity="center">
-    <de.hdodenhof.circleimageview.CircleImageView
+    <ImageView
         android:id="@+id/profilePictureClick"
         android:layout_width="350dp"
         android:layout_height="350dp"

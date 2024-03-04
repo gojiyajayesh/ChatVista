@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.gojiyajayesh.chatvista.adapters.ChatMessageListAdapter;
 import com.gojiyajayesh.chatvista.models.UserChatMessageModel;
+import com.gojiyajayesh.chatvista.models.Users;
 import com.gojiyajayesh.chatvista.utils.AndroidUtils;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -41,7 +42,7 @@ public class IndividualChatActivity extends AppCompatActivity {
     private TextView usernameTextView, statusTextView;
     private FirebaseDatabase database;
     private RecyclerView recyclerView;
-    private String senderToReceiverNode, receiverToSenderNode;
+    private String senderToReceiverNode, receiverToSenderNode, fullName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +51,9 @@ public class IndividualChatActivity extends AppCompatActivity {
         initialization();
         Intent intent = getIntent();
         username = intent.getStringExtra("Username");
-        usernameTextView.setText(username);
         receiverId = intent.getStringExtra("UserId");
+        fullName = intent.getStringExtra("fullName");
+        usernameTextView.setText(fullName);
         senderId = FirebaseAuth.getInstance().getUid();
         // database node
         senderToReceiverNode = senderId + receiverId;
@@ -68,8 +70,6 @@ public class IndividualChatActivity extends AppCompatActivity {
             Picasso.get().load(profileId).placeholder(R.drawable.default_profile_picture).into(profilePictureClick);
             builder.setView(dialogView);
             builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
-            builder.setNegativeButton("Update", (dialog, which) -> AndroidUtils.customToast(this, "Update now", Toast.LENGTH_LONG));
-            builder.setNeutralButton("Exit", (dialog, which) -> dialog.dismiss());
             AlertDialog dialog = builder.create();
             dialog.show();
         });
@@ -77,7 +77,15 @@ public class IndividualChatActivity extends AppCompatActivity {
         videoCall.setOnClickListener(view -> AndroidUtils.customToast(this, "Video Call Is Start Now", Toast.LENGTH_SHORT));
         audioCall.setOnClickListener(view -> AndroidUtils.customToast(this, "Audio Call Is Start Now", Toast.LENGTH_SHORT));
         menuList.setOnClickListener(view -> AndroidUtils.customToast(this, "Menu Show Now", Toast.LENGTH_SHORT));
-        toolbar.setOnClickListener(view -> AndroidUtils.customToast(this, "ToolBar is show", Toast.LENGTH_SHORT));
+        toolbar.setOnClickListener(view -> {
+            Intent intent2 = new Intent(IndividualChatActivity.this, UserProfileDetailActivity.class);
+            Users user = new Users();
+            user.setFullName(fullName);
+            user.setUsername(username);
+            user.setProfileId(profileId);
+            AndroidUtils.setPassedIntentData(intent2,user);
+            startActivity(intent2);
+        });
         backMain.setOnClickListener(view -> {
             onBackPressed();
             finish();
@@ -111,7 +119,7 @@ public class IndividualChatActivity extends AppCompatActivity {
             String text = message.getText().toString().trim();
             if (!text.isEmpty()) {
                 long time = new Date().getTime();
-                UserChatMessageModel dataStore = new UserChatMessageModel(text, senderId,receiverId, time);
+                UserChatMessageModel dataStore = new UserChatMessageModel(text, senderId, receiverId, time);
                 database.getReference().child("Chats").child(senderToReceiverNode).push().setValue(dataStore).addOnSuccessListener(aVoid -> {
                     int length = senderToReceiverNode.length();
                     int mid = length / 2;

@@ -3,6 +3,7 @@
     <style name="Base.Theme.ChatVista" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
          <item name="colorPrimary">@color/my_light_primary</item>
+        <item name="colorPrimaryDark">@color/blue</item>
         <item name="android:background">@color/white</item>
     </style>
     <style name="MyThemeActionBar" parent="Theme.AppCompat.DayNight.DarkActionBar">
