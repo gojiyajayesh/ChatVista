@@ -1,6 +1,5 @@
 package com.gojiyajayesh.chatvista.fragments;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gojiyajayesh.chatvista.R;
-import com.gojiyajayesh.chatvista.adapters.UserChatListAdapter;
+import com.gojiyajayesh.chatvista.adapters.UserListAdapter;
 import com.gojiyajayesh.chatvista.models.Users;
 import com.gojiyajayesh.chatvista.utils.FirebaseUtils;
 import com.google.firebase.database.DataSnapshot;
@@ -23,12 +22,12 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class ChatsListFragment extends Fragment {
+public class ChatScreenFragment extends Fragment {
     ArrayList<Users> list = new ArrayList<>();
     FirebaseDatabase database;
     RecyclerView recyclerView;
 
-    public ChatsListFragment() {
+    public ChatScreenFragment() {
 
     }
 
@@ -38,7 +37,7 @@ public class ChatsListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_chat_list, container, false);
         recyclerView = view.findViewById(R.id.chatListRecyclerView);
         database = FirebaseDatabase.getInstance();
-        UserChatListAdapter adapter=new UserChatListAdapter(list,getContext());
+        UserListAdapter adapter=new UserListAdapter(list,getContext());
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);

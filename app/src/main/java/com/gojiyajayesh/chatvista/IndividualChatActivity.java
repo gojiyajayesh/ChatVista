@@ -53,7 +53,7 @@ public class IndividualChatActivity extends AppCompatActivity {
         username = intent.getStringExtra("Username");
         receiverId = intent.getStringExtra("UserId");
         fullName = intent.getStringExtra("fullName");
-        usernameTextView.setText(fullName);
+        usernameTextView.setText(username);
         senderId = FirebaseAuth.getInstance().getUid();
         // database node
         senderToReceiverNode = senderId + receiverId;

@@ -6,9 +6,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.gojiyajayesh.chatvista.fragments.CallsListFragment;
-import com.gojiyajayesh.chatvista.fragments.ChatsListFragment;
-import com.gojiyajayesh.chatvista.fragments.StatusesListFragment;
+import com.gojiyajayesh.chatvista.fragments.CallScreenFragment;
+import com.gojiyajayesh.chatvista.fragments.ChatScreenFragment;
+import com.gojiyajayesh.chatvista.fragments.StatusScreenFragment;
 
 public class MainAdapter extends FragmentStateAdapter {
 
@@ -20,11 +20,11 @@ public class MainAdapter extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) {
         if(position==0)
-            return new ChatsListFragment();
+            return new ChatScreenFragment();
         else if(position==1)
-            return new StatusesListFragment();
+            return new StatusScreenFragment();
         else
-            return new CallsListFragment();
+            return new CallScreenFragment();
     }
 
     @Override

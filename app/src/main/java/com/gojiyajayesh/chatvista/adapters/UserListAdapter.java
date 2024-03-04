@@ -26,12 +26,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class UserChatListAdapter extends RecyclerView.Adapter<UserChatListAdapter.UserHolder> {
+public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserHolder> {
     private final ArrayList<Users> list;
     private final Context context;
     private final SimpleDateFormat sdf;
 
-    public UserChatListAdapter(ArrayList<Users> list, Context context) {
+    public UserListAdapter(ArrayList<Users> list, Context context) {
         this.list = list;
         this.context = context;
         this.sdf = new SimpleDateFormat("hh:mm a");
@@ -52,6 +52,7 @@ public class UserChatListAdapter extends RecyclerView.Adapter<UserChatListAdapte
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.hasChildren()) {
+                    holder.lastMessage.setText("");
                     for (DataSnapshot i : snapshot.getChildren()) {
                         holder.lastMessage.setText(i.child("message").getValue(String.class));
                         String time = sdf.format(new Date(i.child("messageTime").getValue(Long.class)));
