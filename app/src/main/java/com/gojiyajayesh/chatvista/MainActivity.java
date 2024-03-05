@@ -10,9 +10,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.gojiyajayesh.chatvista.adapters.MainAdapter;
+import com.gojiyajayesh.chatvista.models.UserAvailabilityModel;
+import com.gojiyajayesh.chatvista.utils.FirebaseUtils;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
     private ViewPager2 viewPager;
@@ -42,6 +49,27 @@ public class MainActivity extends AppCompatActivity {
                     break;
             }
         }).attach();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateUserStatus(true);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        updateUserStatus(false);
+    }
+
+    private void updateUserStatus(boolean connected) {
+        UserAvailabilityModel userAvailabilityModel = new UserAvailabilityModel();
+        userAvailabilityModel.setIsOnline(connected);
+        FirebaseDatabase.getInstance().getReference()
+                .child("Availability")
+                .child(FirebaseUtils.currentUserId())
+                .setValue(userAvailabilityModel);
     }
 
     @Override

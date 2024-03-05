@@ -52,5 +52,4 @@ dependencies {
     implementation("de.hdodenhof:circleimageview:3.1.0")
     implementation("com.firebaseui:firebase-ui-firestore:8.0.2")
     implementation("com.google.firebase:firebase-database:20.3.1")
-    implementation ("com.github.3llomi:CircularStatusView:V1.0.3")
 }

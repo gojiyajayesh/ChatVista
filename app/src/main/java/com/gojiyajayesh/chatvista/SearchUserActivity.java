@@ -12,8 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.gojiyajayesh.chatvista.adapters.UserSearchAdapter;
+import com.gojiyajayesh.chatvista.models.UserAvailabilityModel;
 import com.gojiyajayesh.chatvista.models.Users;
 import com.gojiyajayesh.chatvista.utils.FirebaseUtils;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.Query;
 
 public class SearchUserActivity extends AppCompatActivity {
@@ -93,10 +95,23 @@ public class SearchUserActivity extends AppCompatActivity {
             adapter.stopListening();
         }
     }
-
+   @Override
+    protected void onPause() {
+        super.onPause();
+        updateUserStatus(false);
+    }
+    private void updateUserStatus(boolean connected) {
+        UserAvailabilityModel userAvailabilityModel = new UserAvailabilityModel();
+        userAvailabilityModel.setIsOnline(connected);
+        FirebaseDatabase.getInstance().getReference()
+                .child("Availability")
+                .child(FirebaseUtils.currentUserId())
+                .setValue(userAvailabilityModel);
+    }
     @Override
     protected void onResume() {
         super.onResume();
+        updateUserStatus(true);
         if (adapter != null) {
             String searchInputText = searchInput.getText().toString().trim();
             searchRecyclerView(searchInputText);

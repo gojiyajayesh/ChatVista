@@ -18,12 +18,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gojiyajayesh.chatvista.adapters.ChatMessageListAdapter;
+import com.gojiyajayesh.chatvista.models.UserAvailabilityModel;
 import com.gojiyajayesh.chatvista.models.UserChatMessageModel;
 import com.gojiyajayesh.chatvista.models.Users;
 import com.gojiyajayesh.chatvista.utils.AndroidUtils;
+import com.gojiyajayesh.chatvista.utils.FirebaseUtils;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
@@ -54,6 +57,31 @@ public class IndividualChatActivity extends AppCompatActivity {
         receiverId = intent.getStringExtra("UserId");
         fullName = intent.getStringExtra("fullName");
         usernameTextView.setText(username);
+        DatabaseReference availabilityRef = FirebaseDatabase.getInstance().getReference().child("Availability").child(receiverId);
+        availabilityRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    UserAvailabilityModel userAvailabilityModel = snapshot.getValue(UserAvailabilityModel.class);
+                    if (userAvailabilityModel != null) {
+                        boolean isOnline = userAvailabilityModel.getIsOnline();
+                        if(isOnline)
+                        {
+                            statusTextView.setText("Online");
+                        }
+                        else
+                        {
+                            statusTextView.setText("Offline");
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Handle error
+            }
+        });
         senderId = FirebaseAuth.getInstance().getUid();
         // database node
         senderToReceiverNode = senderId + receiverId;
@@ -148,5 +176,24 @@ public class IndividualChatActivity extends AppCompatActivity {
         message = findViewById(R.id.message);
         recyclerView = findViewById(R.id.MessageListRecyclerView);
         database = FirebaseDatabase.getInstance();
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateUserStatus(true);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        updateUserStatus(false);
+    }
+    private void updateUserStatus(boolean connected) {
+        UserAvailabilityModel userAvailabilityModel = new UserAvailabilityModel();
+        userAvailabilityModel.setIsOnline(connected);
+        FirebaseDatabase.getInstance().getReference()
+                .child("Availability")
+                .child(FirebaseUtils.currentUserId())
+                .setValue(userAvailabilityModel);
     }
 }
