@@ -9,6 +9,25 @@ public class Users {
     private String phoneOrEmail;
     private String fullName;
     private Long lastMessageTime;
+    private Long lastStatusUpdateTime;
+
+    public Long getLastStatusUpdateTime() {
+        return lastStatusUpdateTime;
+    }
+
+    public void setLastStatusUpdateTime(Long lastStatusUpdateTime) {
+        this.lastStatusUpdateTime = lastStatusUpdateTime;
+    }
+
+    public String getStatusUrl() {
+        return StatusUrl;
+    }
+
+    public void setStatusUrl(String statusUrl) {
+        StatusUrl = statusUrl;
+    }
+
+    String StatusUrl;
 
     public Users(String phoneOrEmail, String password, String profileId, String username, String fullName, String userId) {
         this.phoneOrEmail = phoneOrEmail;
