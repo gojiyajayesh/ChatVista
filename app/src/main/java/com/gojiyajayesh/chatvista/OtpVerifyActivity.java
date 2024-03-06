@@ -172,6 +172,7 @@ public class OtpVerifyActivity extends AppCompatActivity {
                 inProgress(false);
             }
         };
+
         PhoneAuthOptions options;
         if (isRend) {
             options = PhoneAuthOptions.newBuilder(mAuth).setPhoneNumber(phoneNumber).setTimeout(60L, TimeUnit.SECONDS).setActivity(this).setCallbacks(mCallbacks).setForceResendingToken(mResendToken).build();

@@ -52,13 +52,18 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        //initialization
         initializeComponents();
+
         FacebookSdk.sdkInitialize(getApplicationContext());
         fmCallbackManager = CallbackManager.Factory.create();
         initializeFacebookLogin();
         goSignIn.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), SignInActivity.class)));
         GoogleSignUpBtn.setOnClickListener(view -> signUpWithGoogle());
-        PhoneSignUpBtn.setOnClickListener(v -> startActivity(new Intent(SignUpActivity.this, PhoneLogInActivity.class)));
+        PhoneSignUpBtn.setOnClickListener(v -> {
+            startActivity(new Intent(SignUpActivity.this, PhoneLogInActivity.class));
+            finish();
+        });
         signUp();
     }
 
@@ -146,7 +151,7 @@ public class SignUpActivity extends AppCompatActivity {
                     assert firebaseUser != null;
                     String uid = firebaseUser.getUid();
                     String email = firebaseUser.getEmail();
-                    String displayName=firebaseUser.getDisplayName();
+                    String displayName = firebaseUser.getDisplayName();
                     String profileId = firebaseUser.getPhotoUrl() != null ? firebaseUser.getPhotoUrl().toString() : null;
                     String password = "googleLogin";
                     Intent intent = new Intent(SignUpActivity.this, UserNameActivity.class);

@@ -93,14 +93,11 @@ public class UserNameActivity extends AppCompatActivity {
         Picasso.get().load(user2.getProfileId()).placeholder(R.drawable.default_profile_picture).into(ProfilePic);
         Password = user2.getPassword();
         FullName.setText(user2.getUsername());
-        UpdateProfilePic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                intent.setType("image/*");
-                startActivityForResult(intent, 63);
-            }
+        UpdateProfilePic.setOnClickListener(v -> {
+            Intent intent = new Intent();
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            intent.setType("image/*");
+            startActivityForResult(intent, 63);
         });
         ProfilePic.setOnClickListener(view -> {
             android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
@@ -241,9 +238,21 @@ public class UserNameActivity extends AppCompatActivity {
     }
 
     void setUsername() {
-        String userName = Username.getText().toString().trim();
+        String userName = Username.getText().toString().toLowerCase().trim();
         String fullName = FullName.getText().toString().trim();
-
+        if (userName.isEmpty() || fullName.isEmpty()) {
+            if (userName.isEmpty()) {
+                Username.setError("Username cannot be empty");
+            }
+            if (fullName.isEmpty()) {
+                FullName.setError("Fullname cannot be empty");
+            }
+        }
+        if(userName.length()<6)
+        {
+            Username.setError("Username must be at least 6 characters");
+            return;
+        }
         if (user != null) {
             user.setUsername(userName);
             user.setFullName(fullName);

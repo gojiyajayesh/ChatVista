@@ -55,8 +55,9 @@ public class SignInActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
-
+        // initialization all variables
         initializeComponents();
+
         FacebookSdk.sdkInitialize(getApplicationContext());
 
         facebookSignInButton.setOnClickListener(view -> {
@@ -81,14 +82,18 @@ public class SignInActivity extends AppCompatActivity {
         });
 
         forgotPasswordTextView.setOnClickListener(v -> startActivity(new Intent(SignInActivity.this, ForgotPasswordActivity.class)));
+
         phoneSignInButton.setOnClickListener(v -> {
             Intent intent = new Intent(SignInActivity.this, PhoneLogInActivity.class);
             startActivity(intent);
             finish();
         });
+
         googleSignInButton.setOnClickListener(v -> signInWithGoogle());
+
         signUpTextView.setOnClickListener(v -> startActivity(new Intent(SignInActivity.this, SignUpActivity.class)));
         signIn();
+
     }
 
     private void initializeComponents() {
@@ -146,13 +151,11 @@ public class SignInActivity extends AppCompatActivity {
                 });
             }
         });
-
-        if (FirebaseUtils.isLoggedIn()) {
+        if (mAuth.getCurrentUser() != null) {
             startActivity(new Intent(SignInActivity.this, MainActivity.class));
             finish();
         }
     }
-
     private void signInWithGoogle() {
         googleSignInClient.signOut().addOnCompleteListener(this, task -> {
             Intent signInIntent = googleSignInClient.getSignInIntent();

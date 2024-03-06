@@ -22,7 +22,7 @@ public class PhoneLogInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_phone_log_in);
 
         // Initialize views
-        initializeViews();
+        initialization();
 
         // Register EditText for country code
         countryCodePicker.registerCarrierNumberEditText(phoneNumber);
@@ -39,6 +39,7 @@ public class PhoneLogInActivity extends AppCompatActivity {
             Intent intent = new Intent(PhoneLogInActivity.this, OtpVerifyActivity.class);
             intent.putExtra("mobileNumber", countryCodePicker.getFullNumberWithPlus());
             startActivity(intent);
+            finish();
         });
 
         // Back button click listener
@@ -46,7 +47,7 @@ public class PhoneLogInActivity extends AppCompatActivity {
     }
 
     // Method to initialize views
-    private void initializeViews() {
+    private void initialization() {
         countryCodePicker = findViewById(R.id.countryCodePicker2);
         continueBtn = findViewById(R.id.continue_btn);
         phoneNumber = findViewById(R.id.mobileNumber);
