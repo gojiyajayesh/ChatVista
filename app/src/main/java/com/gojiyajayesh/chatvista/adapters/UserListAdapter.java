@@ -46,8 +46,6 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserHo
 
         holder.username.setText(user.getUsername());
         holder.lastMessage.setText(user.getLastMessage());
-
-        // Check if lastMessageTime is not null before formatting
         if (user.getLastMessageTime() != null) {
             holder.messageArrivalTime.setText(sdf.format(new Date(user.getLastMessageTime())));
         } else {

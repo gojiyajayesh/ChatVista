@@ -43,7 +43,6 @@ public class SignUpActivity extends AppCompatActivity {
     TextView goSignIn;
     FirebaseAuth mAuth;
     FirebaseDatabase database;
-    FirebaseUser user;
     ProgressBar progressBar;
     CallbackManager fmCallbackManager;
     private GoogleSignInClient mGoogleSignInClient;

@@ -45,7 +45,7 @@ public class UserSearchAdapter extends FirestoreRecyclerAdapter<Users, UserSearc
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, IndividualChatActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            FirebaseDatabase database=FirebaseDatabase.getInstance();
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
             database.getReference().child("UserConnections").child(FirebaseUtils.currentUserId()).child(model.getUserId()).setValue(model);
             DatabaseReference userRef = database.getReference().child("Users").child(FirebaseUtils.currentUserId());
             userRef.addListenerForSingleValueEvent(new ValueEventListener() {

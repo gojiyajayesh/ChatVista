@@ -14,8 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.gojiyajayesh.chatvista.R;
 import com.gojiyajayesh.chatvista.StatusViewActivity;
 import com.gojiyajayesh.chatvista.models.Users;
-import com.gojiyajayesh.chatvista.utils.AndroidUtils;
-import com.google.firebase.firestore.auth.User;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
@@ -49,15 +47,15 @@ public class StatusListAdapter extends RecyclerView.Adapter<StatusListAdapter.St
         Users model = userStatusModel.get(position);
         holder.Username.setText(model.getUsername());
         sdf = new SimpleDateFormat("hh:mm a");
-        String time = sdf.format(new Date(model.getLastStatusUpdateTime()!=null?model.getLastStatusUpdateTime():1219021212L));
+        String time = sdf.format(new Date(model.getLastStatusUpdateTime() != null ? model.getLastStatusUpdateTime() : 1219021212L));
         holder.LastStatusUpdateTime.setText(time);
         Picasso.get().load(model.getProfileId()).placeholder(R.drawable.default_profile_picture).into(holder.ProfilePic);
-        holder.itemView.setOnClickListener(view->{
-            String Username=model.getUsername();
-            String ProfileId= model.getProfileId();
-            String StatusUrl=model.getStatusUrl();
-            Long lastTime =model.getLastStatusUpdateTime();
-            Intent in=new Intent(context, StatusViewActivity.class);
+        holder.itemView.setOnClickListener(view -> {
+            String Username = model.getUsername();
+            String ProfileId = model.getProfileId();
+            String StatusUrl = model.getStatusUrl();
+            Long lastTime = model.getLastStatusUpdateTime();
+            Intent in = new Intent(context, StatusViewActivity.class);
             in.putExtra("username", Username);
             in.putExtra("profileId", ProfileId);
             in.putExtra("statusUrl", StatusUrl);

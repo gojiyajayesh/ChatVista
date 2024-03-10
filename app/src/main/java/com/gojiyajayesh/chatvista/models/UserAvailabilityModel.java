@@ -4,6 +4,9 @@ public class UserAvailabilityModel {
     boolean isOnline;
     Long LastOfflineTime;
 
+    public UserAvailabilityModel() {
+    }
+
     public boolean getIsOnline() {
         return isOnline;
     }
@@ -18,8 +21,5 @@ public class UserAvailabilityModel {
 
     public void setLastOfflineTime(Long lastOfflineTime) {
         LastOfflineTime = lastOfflineTime;
-    }
-
-    public UserAvailabilityModel() {
     }
 }

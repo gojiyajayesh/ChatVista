@@ -13,7 +13,7 @@ import com.gojiyajayesh.chatvista.models.Users;
 public class AndroidUtils {
     private static Toast toast;
 
-    public static void customToast(Context context, String message, int timeDuration) {
+    public static void  customToast(Context context, String message, int timeDuration) {
         if (toast != null) {
             toast.cancel();
         }

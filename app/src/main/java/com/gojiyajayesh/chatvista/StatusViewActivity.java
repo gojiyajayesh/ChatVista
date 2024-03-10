@@ -50,7 +50,7 @@ public class StatusViewActivity extends AppCompatActivity {
         Long Time = getIntent().getLongExtra("lastStatusUpdateTime", 0L);
         sdf = new SimpleDateFormat("hh:mm a");
         String time = sdf.format(new Date(Time));
-        lastUpdateTime.setText("Status Update time "+time);
+        lastUpdateTime.setText("Status Update time " + time);
         startTaskSimulation();
     }
 

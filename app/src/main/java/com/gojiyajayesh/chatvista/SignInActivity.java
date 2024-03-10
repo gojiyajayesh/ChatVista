@@ -156,6 +156,7 @@ public class SignInActivity extends AppCompatActivity {
             finish();
         }
     }
+
     private void signInWithGoogle() {
         googleSignInClient.signOut().addOnCompleteListener(this, task -> {
             Intent signInIntent = googleSignInClient.getSignInIntent();
@@ -208,7 +209,7 @@ public class SignInActivity extends AppCompatActivity {
                 assert firebaseUser != null;
                 String uid = firebaseUser.getUid();
                 String email = firebaseUser.getEmail();
-                String displayName=firebaseUser.getDisplayName();
+                String displayName = firebaseUser.getDisplayName();
                 String profileId = firebaseUser.getPhotoUrl() != null ? firebaseUser.getPhotoUrl().toString() : null;
                 String password = "googleLogin";
                 Intent intent = new Intent(SignInActivity.this, UserNameActivity.class);

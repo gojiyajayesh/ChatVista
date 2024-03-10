@@ -19,12 +19,9 @@ public class MainAdapter extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        if(position==0)
-            return new ChatScreenFragment();
-        else if(position==1)
-            return new StatusScreenFragment();
-        else
-            return new CallScreenFragment();
+        if (position == 0) return new ChatScreenFragment();
+        else if (position == 1) return new StatusScreenFragment();
+        else return new CallScreenFragment();
     }
 
     @Override

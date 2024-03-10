@@ -14,7 +14,6 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.gojiyajayesh.chatvista.adapters.MainAdapter;
 import com.gojiyajayesh.chatvista.models.UserAvailabilityModel;
 import com.gojiyajayesh.chatvista.utils.AndroidUtils;
-import com.gojiyajayesh.chatvista.utils.FirebaseUtils;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.auth.FirebaseAuth;
@@ -64,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
         updateUserStatus(false);
     }
+
     private void updateUserStatus(boolean connected) {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
             Log.e("MainActivity", "User not authenticated");
         }
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);

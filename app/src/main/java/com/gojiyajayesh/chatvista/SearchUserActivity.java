@@ -95,19 +95,19 @@ public class SearchUserActivity extends AppCompatActivity {
             adapter.stopListening();
         }
     }
-   @Override
+
+    @Override
     protected void onPause() {
         super.onPause();
         updateUserStatus(false);
     }
+
     private void updateUserStatus(boolean connected) {
         UserAvailabilityModel userAvailabilityModel = new UserAvailabilityModel();
         userAvailabilityModel.setIsOnline(connected);
-        FirebaseDatabase.getInstance().getReference()
-                .child("Availability")
-                .child(FirebaseUtils.currentUserId())
-                .setValue(userAvailabilityModel);
+        FirebaseDatabase.getInstance().getReference().child("Availability").child(FirebaseUtils.currentUserId()).setValue(userAvailabilityModel);
     }
+
     @Override
     protected void onResume() {
         super.onResume();

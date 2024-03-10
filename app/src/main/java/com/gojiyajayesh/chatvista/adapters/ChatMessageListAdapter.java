@@ -206,7 +206,6 @@ public class ChatMessageListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     public static class ReceiverViewHolder extends RecyclerView.ViewHolder {
         TextView Message, Time;
-
         public ReceiverViewHolder(@NonNull View itemView) {
             super(itemView);
             Message = itemView.findViewById(R.id.receiverMessageText);

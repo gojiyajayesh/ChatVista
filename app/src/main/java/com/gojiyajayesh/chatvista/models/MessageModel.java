@@ -6,7 +6,6 @@ public class MessageModel {
     String message;
     Timestamp lastMessageTime;
     String SenderId;
-
     public MessageModel(String message, Timestamp lastMessageTime, String senderId) {
         this.message = message;
         this.lastMessageTime = lastMessageTime;

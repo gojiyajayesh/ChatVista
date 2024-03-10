@@ -5,7 +5,7 @@ public class UserDetails {
     private String username;
 
     public UserDetails() {
-        // Default constructor required for Firestore
+
     }
 
     public UserDetails(String userId, String username) {

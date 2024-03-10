@@ -1,8 +1,5 @@
 package com.gojiyajayesh.chatvista;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -14,6 +11,9 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.gojiyajayesh.chatvista.models.Users;
 import com.gojiyajayesh.chatvista.utils.AndroidUtils;
@@ -72,7 +72,8 @@ public class OtpVerifyActivity extends AppCompatActivity {
             final int index = i;
             otpEditTexts[i].addTextChangedListener(new TextWatcher() {
                 @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                }
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -82,7 +83,8 @@ public class OtpVerifyActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void afterTextChanged(Editable s) {}
+                public void afterTextChanged(Editable s) {
+                }
             });
             otpEditTexts[i].setOnKeyListener((v, keyCode, event) -> {
                 if (keyCode == KeyEvent.KEYCODE_DEL && event.getAction() == KeyEvent.ACTION_DOWN && index > 0 && otpEditTexts[index].getText().toString().isEmpty()) {
@@ -101,8 +103,7 @@ public class OtpVerifyActivity extends AppCompatActivity {
         phoneNumberTextView.setText(phoneNumber);
         mAuth = FirebaseAuth.getInstance();
         verifyBtn = findViewById(R.id.verify_btn);
-        otpEditTexts = new EditText[]{findViewById(R.id.otp_1), findViewById(R.id.otp_2), findViewById(R.id.otp_3),
-                findViewById(R.id.otp_4), findViewById(R.id.otp_5), findViewById(R.id.otp_6)};
+        otpEditTexts = new EditText[]{findViewById(R.id.otp_1), findViewById(R.id.otp_2), findViewById(R.id.otp_3), findViewById(R.id.otp_4), findViewById(R.id.otp_5), findViewById(R.id.otp_6)};
         progressBar = findViewById(R.id.progress_bar_otp);
         resendOtp = findViewById(R.id.resend_otp_txt);
         resendTime = findViewById(R.id.resendTime);

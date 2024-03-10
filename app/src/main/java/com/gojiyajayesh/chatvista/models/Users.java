@@ -1,6 +1,7 @@
 package com.gojiyajayesh.chatvista.models;
 
 public class Users {
+    String StatusUrl;
     private String userId;
     private String username;
     private String lastMessage;
@@ -10,30 +11,13 @@ public class Users {
     private String fullName;
     private Long lastMessageTime;
     private Long lastStatusUpdateTime;
+
     public Users(String userId, String username, String fullName, String profileId) {
         this.userId = userId;
         this.username = username;
         this.fullName = fullName;
         this.profileId = profileId;
     }
-
-    public Long getLastStatusUpdateTime() {
-        return lastStatusUpdateTime;
-    }
-
-    public void setLastStatusUpdateTime(Long lastStatusUpdateTime) {
-        this.lastStatusUpdateTime = lastStatusUpdateTime;
-    }
-
-    public String getStatusUrl() {
-        return StatusUrl;
-    }
-
-    public void setStatusUrl(String statusUrl) {
-        StatusUrl = statusUrl;
-    }
-
-    String StatusUrl;
 
     public Users(String phoneOrEmail, String password, String profileId, String username, String fullName, String userId) {
         this.phoneOrEmail = phoneOrEmail;
@@ -58,6 +42,22 @@ public class Users {
     }
 
     public Users() {
+    }
+
+    public Long getLastStatusUpdateTime() {
+        return lastStatusUpdateTime;
+    }
+
+    public void setLastStatusUpdateTime(Long lastStatusUpdateTime) {
+        this.lastStatusUpdateTime = lastStatusUpdateTime;
+    }
+
+    public String getStatusUrl() {
+        return StatusUrl;
+    }
+
+    public void setStatusUrl(String statusUrl) {
+        StatusUrl = statusUrl;
     }
 
     public String getFullName() {

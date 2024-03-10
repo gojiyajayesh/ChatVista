@@ -2,7 +2,6 @@ package com.gojiyajayesh.chatvista;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -10,11 +9,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.gojiyajayesh.chatvista.models.Users;
 import com.gojiyajayesh.chatvista.utils.AndroidUtils;
@@ -22,19 +17,20 @@ import com.squareup.picasso.Picasso;
 
 public class UserProfileDetailActivity extends AppCompatActivity {
     ImageView ProfilePicture;
-    LinearLayout AudioCall,VideoCall,ShareProfile;
-    TextView Username,FullName,About;
+    LinearLayout AudioCall, VideoCall, ShareProfile;
+    TextView Username, FullName, About;
     String ProfileId;
     Button back;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile_detail);
         initialization();
-        Users user= AndroidUtils.getPassedIntentData(getIntent());
-        Username.setText("~ "+user.getUsername());
+        Users user = AndroidUtils.getPassedIntentData(getIntent());
+        Username.setText("~ " + user.getUsername());
         FullName.setText(user.getFullName());
-        ProfileId=user.getProfileId();
+        ProfileId = user.getProfileId();
         Picasso.get().load(ProfileId).placeholder(R.drawable.default_profile_picture).into(ProfilePicture);
         ProfilePicture.setOnClickListener(view -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -48,19 +44,19 @@ public class UserProfileDetailActivity extends AppCompatActivity {
             AlertDialog dialog = builder.create();
             dialog.show();
         });
-        back.setOnClickListener(v->{
+        back.setOnClickListener(v -> {
             onBackPressed();
         });
     }
-    void initialization()
-    {
-        ProfilePicture=findViewById(R.id.UserDetailActivityProfilePhoto);
-        AudioCall=findViewById(R.id.UserDetailActivityAudioCall);
-        VideoCall=findViewById(R.id.UserDetailActivityVideoCall);
-        ShareProfile=findViewById(R.id.UserDetailActivityShare);
-        Username=findViewById(R.id.UserDetailActivityUsername);
-        FullName=findViewById(R.id.UserDetailActivityFullName);
-        About=findViewById(R.id.UserDetailActivityAbout);
-        back=findViewById(R.id.UserDetailActivityBack);
+
+    void initialization() {
+        ProfilePicture = findViewById(R.id.UserDetailActivityProfilePhoto);
+        AudioCall = findViewById(R.id.UserDetailActivityAudioCall);
+        VideoCall = findViewById(R.id.UserDetailActivityVideoCall);
+        ShareProfile = findViewById(R.id.UserDetailActivityShare);
+        Username = findViewById(R.id.UserDetailActivityUsername);
+        FullName = findViewById(R.id.UserDetailActivityFullName);
+        About = findViewById(R.id.UserDetailActivityAbout);
+        back = findViewById(R.id.UserDetailActivityBack);
     }
 }

@@ -158,9 +158,7 @@ public class StatusScreenFragment extends Fragment {
             HashMap<String, Object> updateMap = new HashMap<>();
             updateMap.put("StatusUrl", statusUrl);
             updateMap.put("lastStatusUpdateTime", new Date().getTime());
-            FirebaseDatabase.getInstance().getReference().child("Users").
-                    child(FirebaseUtils.currentUserId()).updateChildren(updateMap).
-                    addOnSuccessListener(new OnSuccessListener<Void>() {
+            FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseUtils.currentUserId()).updateChildren(updateMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
                     AndroidUtils.customToast(getContext(), "Status Updated", 1);
@@ -175,19 +173,17 @@ public class StatusScreenFragment extends Fragment {
                         Users user = childSnapshot.getValue(Users.class);
                         if (user != null) {
                             String UserId = user.getUserId();
-                            FirebaseDatabase.getInstance().getReference().
-                                    child("UserConnections").child(UserId)
-                                    .child(FirebaseUtils.currentUserId()).updateChildren(updateMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void unused) {
-                                            Log.i("Status","Status Upload Successfully");
-                                        }
-                                    }).addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Log.i("Status","Status Upload Failed!");
-                                        }
-                                    });
+                            FirebaseDatabase.getInstance().getReference().child("UserConnections").child(UserId).child(FirebaseUtils.currentUserId()).updateChildren(updateMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Log.i("Status", "Status Upload Successfully");
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.i("Status", "Status Upload Failed!");
+                                }
+                            });
                         }
                     }
                     inProgress(false);

@@ -65,12 +65,9 @@ public class IndividualChatActivity extends AppCompatActivity {
                     UserAvailabilityModel userAvailabilityModel = snapshot.getValue(UserAvailabilityModel.class);
                     if (userAvailabilityModel != null) {
                         boolean isOnline = userAvailabilityModel.getIsOnline();
-                        if(isOnline)
-                        {
+                        if (isOnline) {
                             statusTextView.setText("Online");
-                        }
-                        else
-                        {
+                        } else {
                             statusTextView.setText("Offline");
                         }
                     }
@@ -111,7 +108,7 @@ public class IndividualChatActivity extends AppCompatActivity {
             user.setFullName(fullName);
             user.setUsername(username);
             user.setProfileId(profileId);
-            AndroidUtils.setPassedIntentData(intent2,user);
+            AndroidUtils.setPassedIntentData(intent2, user);
             startActivity(intent2);
         });
         backMain.setOnClickListener(view -> {
@@ -177,6 +174,7 @@ public class IndividualChatActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.MessageListRecyclerView);
         database = FirebaseDatabase.getInstance();
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -188,12 +186,10 @@ public class IndividualChatActivity extends AppCompatActivity {
         super.onPause();
         updateUserStatus(false);
     }
+
     private void updateUserStatus(boolean connected) {
         UserAvailabilityModel userAvailabilityModel = new UserAvailabilityModel();
         userAvailabilityModel.setIsOnline(connected);
-        FirebaseDatabase.getInstance().getReference()
-                .child("Availability")
-                .child(FirebaseUtils.currentUserId())
-                .setValue(userAvailabilityModel);
+        FirebaseDatabase.getInstance().getReference().child("Availability").child(FirebaseUtils.currentUserId()).setValue(userAvailabilityModel);
     }
 }

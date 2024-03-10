@@ -10,20 +10,15 @@ import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.gojiyajayesh.chatvista.utils.FirebaseUtils;
-import com.google.firebase.auth.FirebaseAuth;
-
 public class SplashActivity extends AppCompatActivity {
     ProgressBar progressBar;
     Animation animation;
-    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         progressBar = findViewById(R.id.progressBar);
-        mAuth=FirebaseAuth.getInstance();
         startTaskSimulation();
     }
 
@@ -36,8 +31,8 @@ public class SplashActivity extends AppCompatActivity {
             progressBar.setVisibility(View.GONE);
             progressBar.clearAnimation();
             animation = null;
-                startActivity(new Intent(SplashActivity.this, SignInActivity.class));
-                finish();
+            startActivity(new Intent(SplashActivity.this, SignInActivity.class));
+            finish();
         }, 1200);
     }
 

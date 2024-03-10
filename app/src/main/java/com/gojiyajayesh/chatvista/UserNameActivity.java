@@ -61,6 +61,7 @@ public class UserNameActivity extends AppCompatActivity {
     FirebaseDatabase database;
     FirebaseFirestore firestore;
     ProgressBar progressBar;
+    ProgressDialog mProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -219,7 +220,6 @@ public class UserNameActivity extends AppCompatActivity {
         return imageFile;
     }
 
-
     Task<Boolean> checkUsernameAvailability(String username) {
         return FirebaseFirestore.getInstance().collection("UserDetails").whereEqualTo("username", username).get().continueWith(task -> {
             if (task.isSuccessful()) {
@@ -248,8 +248,7 @@ public class UserNameActivity extends AppCompatActivity {
                 FullName.setError("Fullname cannot be empty");
             }
         }
-        if(userName.length()<6)
-        {
+        if (userName.length() < 6) {
             Username.setError("Username must be at least 6 characters");
             return;
         }
@@ -269,8 +268,6 @@ public class UserNameActivity extends AppCompatActivity {
             }
         });
     }
-
-    ProgressDialog mProgressDialog;
 
     private void inProgress(boolean isProgress) {
         if (isProgress) {
