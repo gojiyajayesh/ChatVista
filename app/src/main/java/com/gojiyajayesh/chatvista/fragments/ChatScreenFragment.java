@@ -1,15 +1,14 @@
 package com.gojiyajayesh.chatvista.fragments;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.gojiyajayesh.chatvista.R;
 import com.gojiyajayesh.chatvista.adapters.UserListAdapter;
@@ -23,8 +22,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class ChatScreenFragment extends Fragment {
-    ArrayList<Users> list = new ArrayList<>();
-    FirebaseDatabase database;
+    ArrayList<Users> userList = new ArrayList<>();
+    UserListAdapter adapter;
     RecyclerView recyclerView;
 
     public ChatScreenFragment() {
@@ -36,43 +35,71 @@ public class ChatScreenFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_chat_list, container, false);
         recyclerView = view.findViewById(R.id.chatListRecyclerView);
-        database = FirebaseDatabase.getInstance();
-        UserListAdapter adapter=new UserListAdapter(list,getContext());
+        adapter = new UserListAdapter(userList, getContext());
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
-        String currentUserId = FirebaseUtils.currentUserId();
-        if (currentUserId != null) {
-            database.getReference().child("UserConnections").child(currentUserId).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    list.clear();
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                        String userId = dataSnapshot.child("userId").getValue(String.class);
-                        String username = dataSnapshot.child("username").getValue(String.class);
-                        String fullName = dataSnapshot.child("fullName").getValue(String.class);
-                        String profileId=dataSnapshot.child("profileId").getValue(String.class);
-                        Users users = new Users();
-                        users.setUserId(userId);
-                        users.setUsername(username);
-                        users.setFullName(fullName);
-                        users.setProfileId(profileId);
-                        if (users.getUserId().equals(currentUserId)) {
-                            users.setUsername(username+" (Me)");
-                        }
-                        list.add(users);
-                    }
-                    adapter.notifyDataSetChanged();
-                }
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-        }
-
+        fetchUserList();
 
         return view;
+    }
+
+    private void fetchUserList() {
+        String currentUserId = FirebaseUtils.currentUserId();
+        if (currentUserId != null) {
+            FirebaseDatabase.getInstance().getReference().child("UserConnections")
+                    .child(currentUserId).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            userList.clear();
+                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                String userId = dataSnapshot.child("userId").getValue(String.class);
+                                String username = dataSnapshot.child("username").getValue(String.class);
+                                String fullName = dataSnapshot.child("fullName").getValue(String.class);
+                                String profileId = dataSnapshot.child("profileId").getValue(String.class);
+                                Users user = new Users(userId, username, fullName, profileId);
+                                if (userId.equals(currentUserId)) {
+                                    user.setUsername(username + " (Me)");
+                                }
+                                userList.add(user);
+                                fetchLastMessageForUser(user);
+                            }
+                            adapter.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            // Handle onCancelled
+                        }
+                    });
+        }
+    }
+
+    private void fetchLastMessageForUser(Users user) {
+        String chatNode = FirebaseUtils.currentUserId() + user.getUserId();
+        FirebaseDatabase.getInstance().getReference().child("Chats")
+                .child(chatNode)
+                .orderByChild("timestamp")
+                .limitToLast(1)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                String lastMessageText = dataSnapshot.child("message").getValue(String.class);
+                                long messageTime = dataSnapshot.child("messageTime").getValue(Long.class);
+                                user.setLastMessage(lastMessageText);
+                                user.setLastMessageTime(messageTime);
+                                adapter.notifyDataSetChanged();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        // Handle onCancelled
+                    }
+                });
     }
 }

@@ -92,7 +92,7 @@
             android:id="@+id/signInPagePassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
+            android:inputType="textPassword"
             android:textColorHint="#757575" />
     </com.google.android.material.textfield.TextInputLayout>
 

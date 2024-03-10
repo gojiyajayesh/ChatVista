@@ -10,6 +10,12 @@ public class Users {
     private String fullName;
     private Long lastMessageTime;
     private Long lastStatusUpdateTime;
+    public Users(String userId, String username, String fullName, String profileId) {
+        this.userId = userId;
+        this.username = username;
+        this.fullName = fullName;
+        this.profileId = profileId;
+    }
 
     public Long getLastStatusUpdateTime() {
         return lastStatusUpdateTime;

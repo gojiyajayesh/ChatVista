@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -179,12 +180,12 @@ public class StatusScreenFragment extends Fragment {
                                     .child(FirebaseUtils.currentUserId()).updateChildren(updateMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void unused) {
-                                            AndroidUtils.customToast(getContext(), "Status Updated2", 1);
+                                            Log.i("Status","Status Upload Successfully");
                                         }
                                     }).addOnFailureListener(new OnFailureListener() {
                                         @Override
                                         public void onFailure(@NonNull Exception e) {
-                                            AndroidUtils.customToast(getContext(), "Fail2", 1);
+                                            Log.i("Status","Status Upload Failed!");
                                         }
                                     });
                         }
