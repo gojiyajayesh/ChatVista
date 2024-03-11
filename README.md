@@ -116,6 +116,3 @@ This app has been tested on Iqoo, vivo, and realme for Android versions 12, 13, 
 ## Acknowledgments 🙌
 
 We extend our sincere gratitude to JavaTpoint and ChatGPT for their valuable contributions to the development of Chat Vista. Their support, resources, and expertise have been instrumental in the creation and improvement of Chat Vista. Thank you for being a part of our journey towards success!
-```
-
-This README.md file now includes a download button for the Chat Vista APK file. You can copy and paste this content into your repository's README.md file. Make sure to replace the APK file URL with the actual URL of your file.
