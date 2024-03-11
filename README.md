@@ -18,6 +18,7 @@ Chat Vista is a robust and user-friendly chat application designed to provide a 
   - [Usage📲](#usage)
   - [Contributing🤝](#contributing)
   - [Screenshots 📸](#screenshots-)
+  - [Video Demo 📽️](#video-demo-️)
   - [Development Environment 🛠](#development-environment-)
   - [Testing 🧪](#testing-)
   - [Acknowledgments 🙌](#acknowledgments-)
@@ -101,6 +102,12 @@ We welcome contributions to make Chat Vista even better! To contribute:
     <img src="Image/3.png" alt="Screenshot 3">
   </div>
 </div>
+
+## Video Demo 📽️
+
+[![Video Demo](https://img.youtube.com/vi/LGaaCD9mXN8/0.jpg)](https://youtu.be/LGaaCD9mXN8)
+
+Click the image above to watch the video demo.
 
 ## Development Environment 🛠
 
