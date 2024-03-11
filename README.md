@@ -39,7 +39,7 @@ To run Chat Vista on your Android device, follow these steps:
    - Place the `google-services.json` file in the `app` directory of your Android project.
 4. Build and run the application on your Android device.
 
-[Download Chat Vista APK](https://raw.githubusercontent.com/gojiyajayesh/ChatVista/main/AplFile/chavista.apk)
+[Download Chat Vista APK](https://github.com/gojiyajayesh/ChatVista/tree/main/ApkFile)
 
 ## Key Features 🔑
 
