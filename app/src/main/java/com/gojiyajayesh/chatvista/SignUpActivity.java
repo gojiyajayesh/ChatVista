@@ -174,15 +174,6 @@ public class SignUpActivity extends AppCompatActivity {
         }
     }
 
-    private void createUserInDatabase(String uid, String username, String email, String profileId) {
-        Users user = new Users(uid, username, profileId, email, "JayeshAhir1168@1380");
-        database.getReference().child("Users").child(uid).setValue(user).addOnSuccessListener(aVoid -> {
-            Log.d("TAG", "DataStore Successfully");
-        }).addOnFailureListener(e -> {
-            Log.w("TAG", "Failed!", e);
-        });
-    }
-
     private void signUp() {
         SignUp.setOnClickListener(view -> {
             String username = Username.getText().toString().trim();

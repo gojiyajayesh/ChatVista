@@ -1,0 +1,160 @@
+Date : 2024-07-31 15:39:19
+Directory : e:\Android Project's\ChatVista\app
+Total : 102 files,  5440 codes, 116 comments, 616 blanks, all 6172 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| XML      |         72 |      2,805 |         46 |        224 |      3,075 |
+| Java     |         29 |      2,587 |         70 |        392 |      3,049 |
+| JSON     |          1 |         48 |          0 |          0 |         48 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                             | files      | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                |        102 |      5,440 |        116 |        616 |      6,172 |
+| . (Files)                                                                                                        |          1 |         48 |          0 |          0 |         48 |
+| src                                                                                                              |        101 |      5,392 |        116 |        616 |      6,124 |
+| src\androidTest                                                                                                  |          1 |         15 |          6 |          5 |         26 |
+| src\androidTest\java                                                                                             |          1 |         15 |          6 |          5 |         26 |
+| src\androidTest\java\com                                                                                         |          1 |         15 |          6 |          5 |         26 |
+| src\androidTest\java\com\gojiyajayesh                                                                            |          1 |         15 |          6 |          5 |         26 |
+| src\androidTest\java\com\gojiyajayesh\chatvista                                                                  |          1 |         15 |          6 |          5 |         26 |
+| src\main                                                                                                         |         99 |      5,368 |        105 |        608 |      6,081 |
+| src\main (Files)                                                                                                 |          1 |         82 |          1 |          8 |         91 |
+| src\main\java                                                                                                    |         27 |      2,563 |         59 |        384 |      3,006 |
+| src\main\java\com                                                                                                |         27 |      2,563 |         59 |        384 |      3,006 |
+| src\main\java\com\gojiyajayesh                                                                                   |         27 |      2,563 |         59 |        384 |      3,006 |
+| src\main\java\com\gojiyajayesh\chatvista                                                                         |         27 |      2,563 |         59 |        384 |      3,006 |
+| src\main\java\com\gojiyajayesh\chatvista (Files)                                                                 |         12 |      1,520 |         36 |        194 |      1,750 |
+| src\main\java\com\gojiyajayesh\chatvista\adapters                                                                |          5 |        450 |          6 |         68 |        524 |
+| src\main\java\com\gojiyajayesh\chatvista\fragments                                                               |          3 |        297 |         17 |         40 |        354 |
+| src\main\java\com\gojiyajayesh\chatvista\models                                                                  |          5 |        217 |          0 |         66 |        283 |
+| src\main\java\com\gojiyajayesh\chatvista\utils                                                                   |          2 |         79 |          0 |         16 |         95 |
+| src\main\res                                                                                                     |         71 |      2,723 |         45 |        216 |      2,984 |
+| src\main\res\anim                                                                                                |          2 |         18 |          0 |          1 |         19 |
+| src\main\res\drawable                                                                                            |         36 |        523 |          0 |         45 |        568 |
+| src\main\res\layout                                                                                              |         24 |      2,048 |         13 |        168 |      2,229 |
+| src\main\res\menu                                                                                                |          1 |         11 |          0 |          1 |         12 |
+| src\main\res\mipmap-anydpi                                                                                       |          2 |         12 |          0 |          0 |         12 |
+| src\main\res\values                                                                                              |          3 |         99 |          5 |          1 |        105 |
+| src\main\res\values-night                                                                                        |          1 |          4 |          3 |          0 |          7 |
+| src\main\res\xml                                                                                                 |          2 |          8 |         24 |          0 |         32 |
+| src\test                                                                                                         |          1 |          9 |          5 |          3 |         17 |
+| src\test\java                                                                                                    |          1 |          9 |          5 |          3 |         17 |
+| src\test\java\com                                                                                                |          1 |          9 |          5 |          3 |         17 |
+| src\test\java\com\gojiyajayesh                                                                                   |          1 |          9 |          5 |          3 |         17 |
+| src\test\java\com\gojiyajayesh\chatvista                                                                         |          1 |          9 |          5 |          3 |         17 |
++------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                                                         | language | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| e:\Android Project's\ChatVista\app\google-services.json                                                          | JSON     |         48 |          0 |          0 |         48 |
+| e:\Android Project's\ChatVista\app\src\androidTest\java\com\gojiyajayesh\chatvista\ExampleInstrumentedTest.java  | Java     |         15 |          6 |          5 |         26 |
+| e:\Android Project's\ChatVista\app\src\main\AndroidManifest.xml                                                  | XML      |         82 |          1 |          8 |         91 |
+| e:\Android Project's\ChatVista\app\src\main\java\com\gojiyajayesh\chatvista\ForgotPasswordActivity.java          | Java     |         81 |          1 |         13 |         95 |
+| e:\Android Project's\ChatVista\app\src\main\java\com\gojiyajayesh\chatvista\IndividualChatActivity.java          | Java     |        174 |          3 |         19 |        196 |
+| e:\Android Project's\ChatVista\app\src\main\java\com\gojiyajayesh\chatvista\MainActivity.java                    | Java     |         88 |          1 |         14 |        103 |
+| e:\Android Project's\ChatVista\app\src\main\java\com\gojiyajayesh\chatvista\OtpVerifyActivity.java               | Java     |        174 |         12 |         24 |        210 |
+| e:\Android Project's\ChatVista\app\src\main\java\com\gojiyajayesh\chatvista\PhoneLogInActivity.java              | Java     |         38 |          7 |         12 |         57 |
+| e:\Android Project's\ChatVista\app\src\main\java\com\gojiyajayesh\chatvista\SearchUserActivity.java              | Java     |        102 |          0 |         19 |        121 |
+| e:\Android Project's\ChatVista\app\src\main\java\com\gojiyajayesh\chatvista\SignInActivity.java                  | Java     |        203 |          1 |         27 |        231 |
+| e:\Android Project's\ChatVista\app\src\main\java\com\gojiyajayesh\chatvista\SignUpActivity.java                  | Java     |        212 |          1 |         23 |        236 |
+| e:\Android Project's\ChatVista\app\src\main\java\com\gojiyajayesh\chatvista\SplashActivity.java                  | Java     |         40 |          1 |          7 |         48 |
+| e:\Android Project's\ChatVista\app\src\main\java\com\gojiyajayesh\chatvista\StatusViewActivity.java              | Java     |         61 |          0 |          7 |         68 |
+| e:\Android Project's\ChatVista\app\src\main\java\com\gojiyajayesh\chatvista\UserNameActivity.java                | Java     |        291 |          9 |         23 |        323 |
+| e:\Android Project's\ChatVista\app\src\main\java\com\gojiyajayesh\chatvista\UserProfileDetailActivity.java       | Java     |         56 |          0 |          6 |         62 |
+| e:\Android Project's\ChatVista\app\src\main\java\com\gojiyajayesh\chatvista\adapters\ChatMessageListAdapter.java | Java     |        193 |          5 |         18 |        216 |
+| e:\Android Project's\ChatVista\app\src\main\java\com\gojiyajayesh\chatvista\adapters\MainAdapter.java            | Java     |         25 |          0 |          7 |         32 |
+| e:\Android Project's\ChatVista\app\src\main\java\com\gojiyajayesh\chatvista\adapters\StatusListAdapter.java      | Java     |         70 |          0 |         15 |         85 |
+| e:\Android Project's\ChatVista\app\src\main\java\com\gojiyajayesh\chatvista\adapters\UserListAdapter.java        | Java     |         84 |          0 |         16 |        100 |
+| e:\Android Project's\ChatVista\app\src\main\java\com\gojiyajayesh\chatvista\adapters\UserSearchAdapter.java      | Java     |         78 |          1 |         12 |         91 |
+| e:\Android Project's\ChatVista\app\src\main\java\com\gojiyajayesh\chatvista\fragments\CallScreenFragment.java    | Java     |         15 |          0 |          6 |         21 |
+| e:\Android Project's\ChatVista\app\src\main\java\com\gojiyajayesh\chatvista\fragments\ChatScreenFragment.java    | Java     |         83 |          2 |         15 |        100 |
+| e:\Android Project's\ChatVista\app\src\main\java\com\gojiyajayesh\chatvista\fragments\StatusScreenFragment.java  | Java     |        199 |         15 |         19 |        233 |
+| e:\Android Project's\ChatVista\app\src\main\java\com\gojiyajayesh\chatvista\models\MessageModel.java             | Java     |         32 |          0 |         10 |         42 |
+| e:\Android Project's\ChatVista\app\src\main\java\com\gojiyajayesh\chatvista\models\UserAvailabilityModel.java    | Java     |         19 |          0 |          7 |         26 |
+| e:\Android Project's\ChatVista\app\src\main\java\com\gojiyajayesh\chatvista\models\UserChatMessageModel.java     | Java     |         43 |          0 |         13 |         56 |
+| e:\Android Project's\ChatVista\app\src\main\java\com\gojiyajayesh\chatvista\models\UserDetails.java              | Java     |         23 |          0 |          9 |         32 |
+| e:\Android Project's\ChatVista\app\src\main\java\com\gojiyajayesh\chatvista\models\Users.java                    | Java     |        100 |          0 |         27 |        127 |
+| e:\Android Project's\ChatVista\app\src\main\java\com\gojiyajayesh\chatvista\utils\AndroidUtils.java              | Java     |         47 |          0 |          7 |         54 |
+| e:\Android Project's\ChatVista\app\src\main\java\com\gojiyajayesh\chatvista\utils\FirebaseUtils.java             | Java     |         32 |          0 |          9 |         41 |
+| e:\Android Project's\ChatVista\app\src\main\res\anim\progress_bar_anim.xml                                       | XML      |          9 |          0 |          1 |         10 |
+| e:\Android Project's\ChatVista\app\src\main\res\anim\status_progress_bar.xml                                     | XML      |          9 |          0 |          0 |          9 |
+| e:\Android Project's\ChatVista\app\src\main\res\drawable\arrow_left.xml                                          | XML      |         12 |          0 |          1 |         13 |
+| e:\Android Project's\ChatVista\app\src\main\res\drawable\baseline_android_24.xml                                 | XML      |          6 |          0 |          1 |          7 |
+| e:\Android Project's\ChatVista\app\src\main\res\drawable\btn_background.xml                                      | XML      |          9 |          0 |          0 |          9 |
+| e:\Android Project's\ChatVista\app\src\main\res\drawable\call_24px.xml                                           | XML      |          5 |          0 |          1 |          6 |
+| e:\Android Project's\ChatVista\app\src\main\res\drawable\circle_btn_background.xml                               | XML      |         10 |          0 |          0 |         10 |
+| e:\Android Project's\ChatVista\app\src\main\res\drawable\country_background.xml                                  | XML      |         10 |          0 |          0 |         10 |
+| e:\Android Project's\ChatVista\app\src\main\res\drawable\custom_toast_background.xml                             | XML      |          9 |          0 |          1 |         10 |
+| e:\Android Project's\ChatVista\app\src\main\res\drawable\default_profile_icon.xml                                | XML      |          5 |          0 |          1 |          6 |
+| e:\Android Project's\ChatVista\app\src\main\res\drawable\detail_back.xml                                         | XML      |         10 |          0 |          0 |         10 |
+| e:\Android Project's\ChatVista\app\src\main\res\drawable\facebook.xml                                            | XML      |         12 |          0 |          1 |         13 |
+| e:\Android Project's\ChatVista\app\src\main\res\drawable\google.xml                                              | XML      |         18 |          0 |          1 |         19 |
+| e:\Android Project's\ChatVista\app\src\main\res\drawable\ic_launcher_background.xml                              | XML      |        170 |          0 |          1 |        171 |
+| e:\Android Project's\ChatVista\app\src\main\res\drawable\ic_launcher_foreground.xml                              | XML      |         30 |          0 |          0 |         30 |
+| e:\Android Project's\ChatVista\app\src\main\res\drawable\input_background.xml                                    | XML      |         10 |          0 |          0 |         10 |
+| e:\Android Project's\ChatVista\app\src\main\res\drawable\main_logo_2.xml                                         | XML      |          8 |          0 |          8 |         16 |
+| e:\Android Project's\ChatVista\app\src\main\res\drawable\main_logo_3.xml                                         | XML      |          8 |          0 |          8 |         16 |
+| e:\Android Project's\ChatVista\app\src\main\res\drawable\menu_24px.xml                                           | XML      |          9 |          0 |          1 |         10 |
+| e:\Android Project's\ChatVista\app\src\main\res\drawable\message_count_background.xml                            | XML      |          8 |          0 |          0 |          8 |
+| e:\Android Project's\ChatVista\app\src\main\res\drawable\next_btn_background.xml                                 | XML      |         10 |          0 |          0 |         10 |
+| e:\Android Project's\ChatVista\app\src\main\res\drawable\otp_background.xml                                      | XML      |          6 |          0 |          0 |          6 |
+| e:\Android Project's\ChatVista\app\src\main\res\drawable\phone.xml                                               | XML      |          8 |          0 |          1 |          9 |
+| e:\Android Project's\ChatVista\app\src\main\res\drawable\phone_input_background.xml                              | XML      |         10 |          0 |          0 |         10 |
+| e:\Android Project's\ChatVista\app\src\main\res\drawable\plus_circle.xml                                         | XML      |          4 |          0 |          4 |          8 |
+| e:\Android Project's\ChatVista\app\src\main\res\drawable\profile_image_background.xml                            | XML      |          8 |          0 |          0 |          8 |
+| e:\Android Project's\ChatVista\app\src\main\res\drawable\progress_bar_drawable.xml                               | XML      |         16 |          0 |          1 |         17 |
+| e:\Android Project's\ChatVista\app\src\main\res\drawable\receiver_message_background.xml                         | XML      |         21 |          0 |          1 |         22 |
+| e:\Android Project's\ChatVista\app\src\main\res\drawable\reject_img.xml                                          | XML      |          4 |          0 |          4 |          8 |
+| e:\Android Project's\ChatVista\app\src\main\res\drawable\search_icon.xml                                         | XML      |          5 |          0 |          1 |          6 |
+| e:\Android Project's\ChatVista\app\src\main\res\drawable\send.xml                                                | XML      |          5 |          0 |          1 |          6 |
+| e:\Android Project's\ChatVista\app\src\main\res\drawable\sender_message_background.xml                           | XML      |         20 |          0 |          0 |         20 |
+| e:\Android Project's\ChatVista\app\src\main\res\drawable\share_24px.xml                                          | XML      |          3 |          0 |          3 |          6 |
+| e:\Android Project's\ChatVista\app\src\main\res\drawable\status_progressbar_background.xml                       | XML      |         16 |          0 |          1 |         17 |
+| e:\Android Project's\ChatVista\app\src\main\res\drawable\user_image_with_black_background.xml                    | XML      |          9 |          0 |          1 |         10 |
+| e:\Android Project's\ChatVista\app\src\main\res\drawable\verification.xml                                        | XML      |         16 |          0 |          1 |         17 |
+| e:\Android Project's\ChatVista\app\src\main\res\drawable\verification_background.xml                             | XML      |          6 |          0 |          0 |          6 |
+| e:\Android Project's\ChatVista\app\src\main\res\drawable\video_outline.xml                                       | XML      |          7 |          0 |          1 |          8 |
+| e:\Android Project's\ChatVista\app\src\main\res\layout\activity_forgot_password.xml                              | XML      |         81 |          0 |          5 |         86 |
+| e:\Android Project's\ChatVista\app\src\main\res\layout\activity_individual_chat.xml                              | XML      |        139 |          0 |         14 |        153 |
+| e:\Android Project's\ChatVista\app\src\main\res\layout\activity_main.xml                                         | XML      |         23 |          0 |          1 |         24 |
+| e:\Android Project's\ChatVista\app\src\main\res\layout\activity_otp_verify.xml                                   | XML      |        195 |          0 |         15 |        210 |
+| e:\Android Project's\ChatVista\app\src\main\res\layout\activity_phone_log_in.xml                                 | XML      |        112 |          0 |          7 |        119 |
+| e:\Android Project's\ChatVista\app\src\main\res\layout\activity_search_user.xml                                  | XML      |         67 |          0 |          0 |         67 |
+| e:\Android Project's\ChatVista\app\src\main\res\layout\activity_sign_in.xml                                      | XML      |        232 |          0 |         19 |        251 |
+| e:\Android Project's\ChatVista\app\src\main\res\layout\activity_sign_up.xml                                      | XML      |        224 |          0 |         22 |        246 |
+| e:\Android Project's\ChatVista\app\src\main\res\layout\activity_single_chat.xml                                  | XML      |        139 |          0 |         14 |        153 |
+| e:\Android Project's\ChatVista\app\src\main\res\layout\activity_splash.xml                                       | XML      |         31 |          0 |          2 |         33 |
+| e:\Android Project's\ChatVista\app\src\main\res\layout\activity_status_view.xml                                  | XML      |         87 |          0 |          5 |         92 |
+| e:\Android Project's\ChatVista\app\src\main\res\layout\activity_user_chat_profile.xml                            | XML      |          8 |          0 |          1 |          9 |
+| e:\Android Project's\ChatVista\app\src\main\res\layout\activity_user_name.xml                                    | XML      |        153 |         12 |         18 |        183 |
+| e:\Android Project's\ChatVista\app\src\main\res\layout\activity_user_profile_detail.xml                          | XML      |        214 |          0 |         22 |        236 |
+| e:\Android Project's\ChatVista\app\src\main\res\layout\adepter_sample_receiver_layout.xml                        | XML      |         48 |          0 |          3 |         51 |
+| e:\Android Project's\ChatVista\app\src\main\res\layout\adepter_sample_sender_layout.xml                          | XML      |         57 |          0 |          4 |         61 |
+| e:\Android Project's\ChatVista\app\src\main\res\layout\custom_toast_layout.xml                                   | XML      |         29 |          0 |          1 |         30 |
+| e:\Android Project's\ChatVista\app\src\main\res\layout\fragment_calls_list.xml                                   | XML      |         13 |          1 |          2 |         16 |
+| e:\Android Project's\ChatVista\app\src\main\res\layout\fragment_chat_list.xml                                    | XML      |         11 |          0 |          2 |         13 |
+| e:\Android Project's\ChatVista\app\src\main\res\layout\fragment_status_list.xml                                  | XML      |         23 |          0 |          1 |         24 |
+| e:\Android Project's\ChatVista\app\src\main\res\layout\profile_picture_view.xml                                  | XML      |         17 |          0 |          1 |         18 |
+| e:\Android Project's\ChatVista\app\src\main\res\layout\search_recycler_sample_layout.xml                         | XML      |         40 |          0 |          3 |         43 |
+| e:\Android Project's\ChatVista\app\src\main\res\layout\status_sample_raw_layout.xml                              | XML      |         42 |          0 |          1 |         43 |
+| e:\Android Project's\ChatVista\app\src\main\res\layout\user_list_sample_layout.xml                               | XML      |         63 |          0 |          5 |         68 |
+| e:\Android Project's\ChatVista\app\src\main\res\menu\main_menu.xml                                               | XML      |         11 |          0 |          1 |         12 |
+| e:\Android Project's\ChatVista\app\src\main\res\mipmap-anydpi\ic_launcher.xml                                    | XML      |          6 |          0 |          0 |          6 |
+| e:\Android Project's\ChatVista\app\src\main\res\mipmap-anydpi\ic_launcher_round.xml                              | XML      |          6 |          0 |          0 |          6 |
+| e:\Android Project's\ChatVista\app\src\main\res\values-night\themes.xml                                          | XML      |          4 |          3 |          0 |          7 |
+| e:\Android Project's\ChatVista\app\src\main\res\values\colors.xml                                                | XML      |         25 |          0 |          0 |         25 |
+| e:\Android Project's\ChatVista\app\src\main\res\values\strings.xml                                               | XML      |         52 |          1 |          0 |         53 |
+| e:\Android Project's\ChatVista\app\src\main\res\values\themes.xml                                                | XML      |         22 |          4 |          1 |         27 |
+| e:\Android Project's\ChatVista\app\src\main\res\xml\backup_rules.xml                                             | XML      |          3 |         10 |          0 |         13 |
+| e:\Android Project's\ChatVista\app\src\main\res\xml\data_extraction_rules.xml                                    | XML      |          5 |         14 |          0 |         19 |
+| e:\Android Project's\ChatVista\app\src\test\java\com\gojiyajayesh\chatvista\ExampleUnitTest.java                 | Java     |          9 |          5 |          3 |         17 |
+| Total                                                                                                            |          |      5,440 |        116 |        616 |      6,172 |
++------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+

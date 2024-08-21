@@ -53,7 +53,7 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserHo
             holder.lastMessage.setText("Tap to chat");
         }
 
-        Picasso.get().load(user.getProfileId()).placeholder(R.drawable.default_profile_picture).into(holder.profilePicture);
+        Picasso.get().load(user.getProfileId()).placeholder(R.drawable.default_profile_picture2).into(holder.profilePicture);
 
         holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(context, IndividualChatActivity.class);
@@ -70,7 +70,7 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserHo
             LayoutInflater inflater = LayoutInflater.from(holder.itemView.getContext());
             View dialogView = inflater.inflate(R.layout.profile_picture_view, null);
             ImageView profilePictureClick = dialogView.findViewById(R.id.profilePictureClick);
-            Picasso.get().load(user.getProfileId()).placeholder(R.drawable.default_profile_picture).into(profilePictureClick);
+            Picasso.get().load(user.getProfileId()).placeholder(R.drawable.default_profile_picture2).into(profilePictureClick);
             builder.setView(dialogView);
             builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
             AlertDialog dialog = builder.create();

@@ -75,18 +75,6 @@ public class StatusScreenFragment extends Fragment {
         imageLoadMethod();
         return view;
     }
-//
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        imageLoadMethod();
-//    }
-//
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        imageLoadMethod();
-//    }
 
     public void imageLoadMethod() {
         String currentUserId = FirebaseUtils.currentUserId();

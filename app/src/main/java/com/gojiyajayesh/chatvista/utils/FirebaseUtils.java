@@ -9,7 +9,9 @@ public class FirebaseUtils {
     public static String currentUserId() {
         return FirebaseAuth.getInstance().getUid();
     }
-
+    public static String currentUserName() {
+        return FirebaseAuth.getInstance().getUid();
+    }
     public static DocumentReference currentUserDetail() {
         return FirebaseFirestore.getInstance().collection("Users").document(currentUserId());
     }

@@ -31,14 +31,14 @@ public class UserProfileDetailActivity extends AppCompatActivity {
         Username.setText("~ " + user.getUsername());
         FullName.setText(user.getFullName());
         ProfileId = user.getProfileId();
-        Picasso.get().load(ProfileId).placeholder(R.drawable.default_profile_picture).into(ProfilePicture);
+        Picasso.get().load(ProfileId).placeholder(R.drawable.default_profile_picture2).into(ProfilePicture);
         ProfilePicture.setOnClickListener(view -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle(user.getUsername());
             LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
             View dialogView = inflater.inflate(R.layout.profile_picture_view, null);
             ImageView profilePictureClick = dialogView.findViewById(R.id.profilePictureClick);
-            Picasso.get().load(ProfileId).placeholder(R.drawable.default_profile_picture).into(profilePictureClick);
+            Picasso.get().load(ProfileId).placeholder(R.drawable.default_profile_picture2).into(profilePictureClick);
             builder.setView(dialogView);
             builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
             AlertDialog dialog = builder.create();

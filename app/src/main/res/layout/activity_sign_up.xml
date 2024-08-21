@@ -26,7 +26,7 @@
         android:layout_height="100dp"
         android:layout_marginTop="50dp"
         android:contentDescription="@string/logo_for_chatapplication"
-        android:src="@drawable/main_logo"
+        android:src="@drawable/main_logo_2"
         app:layout_constraintEnd_toStartOf="@+id/verticalGuideline2"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="@+id/verticalGuideline"

@@ -48,10 +48,10 @@
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/sampleProfilePicture"
                 app:layout_constraintEnd_toStartOf="@+id/guideline"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/sampleProfilePicture"
                 app:layout_constraintTop_toTopOf="@+id/sampleProfilePicture"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintVertical_bias="0.0"/>
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/userChatStatus"
@@ -76,40 +76,17 @@
                 app:layout_constraintGuide_begin="250dp" />
 
             <ImageButton
-                android:id="@+id/normalCallButton"
-                android:layout_width="34dp"
-                android:layout_height="34dp"
-                android:background="@color/blue"
-                android:src="@drawable/call_24px"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/videoCallButton"
-                app:layout_constraintStart_toStartOf="@+id/guideline"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageButton
-                android:id="@+id/videoCallButton"
-                android:layout_width="34dp"
-                android:layout_height="34dp"
-                android:background="@color/blue"
-                android:src="@drawable/video_outline"
-                app:layout_constraintBottom_toBottomOf="@+id/normalCallButton"
-                app:layout_constraintEnd_toStartOf="@+id/menuButton"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/normalCallButton"
-                app:layout_constraintTop_toTopOf="@+id/normalCallButton" />
-
-            <ImageButton
                 android:id="@+id/menuButton"
                 android:layout_width="34dp"
                 android:layout_height="34dp"
                 android:background="@android:color/transparent"
                 android:contentDescription="Menu Button"
                 android:src="@drawable/menu_24px"
-                app:layout_constraintBottom_toBottomOf="@+id/videoCallButton"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/videoCallButton"
-                app:layout_constraintTop_toTopOf="@+id/videoCallButton"
+                app:layout_constraintHorizontal_bias="0.829"
+                app:layout_constraintStart_toEndOf="@+id/ChatActivityUsername"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="TouchTargetSizeCheck" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.appcompat.widget.Toolbar>
@@ -125,28 +102,29 @@
         android:id="@+id/layout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="6dp"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:layout_margin="6dp">
+
         <EditText
             android:id="@+id/message"
             android:layout_width="0dp"
             android:layout_height="48dp"
-            android:layout_weight="7"
             android:layout_marginStart="6dp"
-            android:hint="Message"
+            android:layout_weight="7"
             android:background="@drawable/phone_input_background"
+            android:hint="Message"
             android:paddingStart="10dp" />
 
         <ImageButton
             android:id="@+id/sendMessage"
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_marginStart="8dp"
-            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/circle_btn_background"
             android:contentDescription="@string/continue_with_google_sign"
             android:padding="8dp"
-            android:background="@drawable/circle_btn_background"
             android:src="@drawable/send" />
     </LinearLayout>
 </RelativeLayout>

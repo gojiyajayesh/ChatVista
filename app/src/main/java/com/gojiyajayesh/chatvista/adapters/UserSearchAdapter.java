@@ -37,7 +37,7 @@ public class UserSearchAdapter extends FirestoreRecyclerAdapter<Users, UserSearc
     protected void onBindViewHolder(@NonNull UserViewHolder holder, int position, @NonNull Users model) {
         holder.username.setText(model.getUsername());
         holder.fullName.setText(model.getFullName());
-        Picasso.get().load(model.getProfileId()).placeholder(R.drawable.default_profile_picture).into(holder.profilePicture);
+        Picasso.get().load(model.getProfileId()).placeholder(R.drawable.default_profile_picture2).into(holder.profilePicture);
         if (model.getUserId().equals(FirebaseUtils.currentUserId())) {
             holder.username.setText(model.getUsername() + " (You)");
         }

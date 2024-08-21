@@ -11,6 +11,7 @@ android {
         applicationId = "com.gojiyajayesh.chatvista"
         minSdk = 27
         targetSdk = 34
+        vectorDrawables.useSupportLibrary = true
         versionCode = 1
         versionName = "1.0"
 
@@ -52,4 +53,5 @@ dependencies {
     implementation("de.hdodenhof:circleimageview:3.1.0")
     implementation("com.firebaseui:firebase-ui-firestore:8.0.2")
     implementation("com.google.firebase:firebase-database:20.3.1")
+    implementation("com.github.ZEGOCLOUD:zego_uikit_prebuilt_call_android:+")
 }

@@ -47,7 +47,6 @@ public class SignInActivity extends AppCompatActivity {
     private ProgressBar progressBar;
 
     private FirebaseAuth mAuth;
-    private FirebaseDatabase database;
     private CallbackManager callbackManager;
     private GoogleSignInClient googleSignInClient;
 
@@ -86,7 +85,6 @@ public class SignInActivity extends AppCompatActivity {
         phoneSignInButton.setOnClickListener(v -> {
             Intent intent = new Intent(SignInActivity.this, PhoneLogInActivity.class);
             startActivity(intent);
-            finish();
         });
 
         googleSignInButton.setOnClickListener(v -> signInWithGoogle());
@@ -108,7 +106,6 @@ public class SignInActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.signInProgressBar);
 
         mAuth = FirebaseAuth.getInstance();
-        database = FirebaseDatabase.getInstance();
         callbackManager = CallbackManager.Factory.create();
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build();
@@ -149,7 +146,7 @@ public class SignInActivity extends AppCompatActivity {
                     }
                     inProgress(false);
                 });
-            }
+            };
         });
         if (mAuth.getCurrentUser() != null) {
             startActivity(new Intent(SignInActivity.this, MainActivity.class));

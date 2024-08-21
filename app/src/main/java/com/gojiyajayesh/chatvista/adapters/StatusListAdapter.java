@@ -49,7 +49,7 @@ public class StatusListAdapter extends RecyclerView.Adapter<StatusListAdapter.St
         sdf = new SimpleDateFormat("hh:mm a");
         String time = sdf.format(new Date(model.getLastStatusUpdateTime() != null ? model.getLastStatusUpdateTime() : 1219021212L));
         holder.LastStatusUpdateTime.setText(time);
-        Picasso.get().load(model.getProfileId()).placeholder(R.drawable.default_profile_picture).into(holder.ProfilePic);
+        Picasso.get().load(model.getProfileId()).placeholder(R.drawable.default_profile_picturestatus).into(holder.ProfilePic);
         holder.itemView.setOnClickListener(view -> {
             String Username = model.getUsername();
             String ProfileId = model.getProfileId();

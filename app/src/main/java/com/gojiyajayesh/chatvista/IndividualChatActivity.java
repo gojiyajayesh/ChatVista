@@ -36,7 +36,7 @@ import java.util.Date;
 
 public class IndividualChatActivity extends AppCompatActivity {
     private final ArrayList<UserChatMessageModel> chatMessageModels = new ArrayList<>();
-    private ImageButton videoCall, audioCall, menuList, backMain, sendMessage;
+    private ImageButton menuList, backMain, sendMessage;
     private ImageView profilePicture;
     private EditText message;
     private Toolbar toolbar;
@@ -84,7 +84,7 @@ public class IndividualChatActivity extends AppCompatActivity {
         senderToReceiverNode = senderId + receiverId;
         receiverToSenderNode = receiverId + senderId;
         profileId = intent.getStringExtra("ProfilePicture");
-        Picasso.get().load(profileId).placeholder(R.drawable.default_profile_picture).into(profilePicture);
+        Picasso.get().load(profileId).placeholder(R.drawable.default_profile_picture2).into(profilePicture);
 
         profilePicture.setOnClickListener(view -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -92,15 +92,12 @@ public class IndividualChatActivity extends AppCompatActivity {
             LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
             View dialogView = inflater.inflate(R.layout.profile_picture_view, null);
             ImageView profilePictureClick = dialogView.findViewById(R.id.profilePictureClick);
-            Picasso.get().load(profileId).placeholder(R.drawable.default_profile_picture).into(profilePictureClick);
+            Picasso.get().load(profileId).placeholder(R.drawable.default_profile_picture2).into(profilePictureClick);
             builder.setView(dialogView);
             builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
             AlertDialog dialog = builder.create();
             dialog.show();
         });
-
-        videoCall.setOnClickListener(view -> AndroidUtils.customToast(this, "Video Call Is Start Now", Toast.LENGTH_SHORT));
-        audioCall.setOnClickListener(view -> AndroidUtils.customToast(this, "Audio Call Is Start Now", Toast.LENGTH_SHORT));
         menuList.setOnClickListener(view -> AndroidUtils.customToast(this, "Menu Show Now", Toast.LENGTH_SHORT));
         toolbar.setOnClickListener(view -> {
             Intent intent2 = new Intent(IndividualChatActivity.this, UserProfileDetailActivity.class);
@@ -161,8 +158,6 @@ public class IndividualChatActivity extends AppCompatActivity {
     }
 
     private void initialization() {
-        videoCall = findViewById(R.id.videoCallButton);
-        audioCall = findViewById(R.id.normalCallButton);
         menuList = findViewById(R.id.menuButton);
         sendMessage = findViewById(R.id.sendMessage);
         profilePicture = findViewById(R.id.sampleProfilePicture);

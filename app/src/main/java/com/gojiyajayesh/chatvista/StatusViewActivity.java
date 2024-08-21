@@ -40,13 +40,13 @@ public class StatusViewActivity extends AppCompatActivity {
         String username = intent.getStringExtra("username");
         Username.setText(username);
         String profileId = intent.getStringExtra("profileId");
-        Picasso.get().load(profileId).placeholder(R.drawable.default_profile_picture).into(ProfilePhoto);
+        Picasso.get().load(profileId).placeholder(R.drawable.default_profile_picture2).into(ProfilePhoto);
         back.setOnClickListener(view -> {
             onBackPressed();
             finish();
         });
         String StatusId = intent.getStringExtra("statusUrl");
-        Picasso.get().load(StatusId).placeholder(R.drawable.default_profile_picture).into(StatusPhoto);
+        Picasso.get().load(StatusId).placeholder(R.drawable.default_profile_picturestatus).into(StatusPhoto);
         Long Time = getIntent().getLongExtra("lastStatusUpdateTime", 0L);
         sdf = new SimpleDateFormat("hh:mm a");
         String time = sdf.format(new Date(Time));

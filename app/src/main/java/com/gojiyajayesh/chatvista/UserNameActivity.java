@@ -91,7 +91,7 @@ public class UserNameActivity extends AppCompatActivity {
         PhoneOrEmail = user2.getPhoneOrEmail();
         Uid = user2.getUserId();
         ProfileId = user2.getProfileId();
-        Picasso.get().load(user2.getProfileId()).placeholder(R.drawable.default_profile_picture).into(ProfilePic);
+        Picasso.get().load(user2.getProfileId()).placeholder(R.drawable.default_profile_picture2).into(ProfilePic);
         Password = user2.getPassword();
         FullName.setText(user2.getUsername());
         UpdateProfilePic.setOnClickListener(v -> {
@@ -106,7 +106,7 @@ public class UserNameActivity extends AppCompatActivity {
             LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
             View dialogView = inflater.inflate(R.layout.profile_picture_view, null);
             ImageView profilePictureClick = dialogView.findViewById(R.id.profilePictureClick);
-            Picasso.get().load(ProfileId).placeholder(R.drawable.default_profile_picture).into(profilePictureClick);
+            Picasso.get().load(ProfileId).placeholder(R.drawable.default_profile_picture2).into(profilePictureClick);
             builder.setView(dialogView);
             builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
             builder.setNegativeButton("Update", (dialog, which) -> {
@@ -292,7 +292,7 @@ public class UserNameActivity extends AppCompatActivity {
                 if (user != null) {
                     Username.setText(user.getUsername());
                     FullName.setText(user.getFullName());
-                    Picasso.get().load(user.getProfileId()).placeholder(R.drawable.default_profile_picture).into(ProfilePic);
+                    Picasso.get().load(user.getProfileId()).placeholder(R.drawable.default_profile_picture2).into(ProfilePic);
                 }
             }
         });

@@ -80,7 +80,7 @@
                 android:layout_width="34dp"
                 android:layout_height="34dp"
                 android:background="@color/blue"
-                android:src="@drawable/call_24px"
+                android:src="@drawable/call_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/SingleActivityvideoCallButton"
                 app:layout_constraintStart_toStartOf="@+id/guideline"

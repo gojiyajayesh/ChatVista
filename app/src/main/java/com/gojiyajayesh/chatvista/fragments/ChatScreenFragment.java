@@ -20,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ChatScreenFragment extends Fragment {
     ArrayList<Users> userList = new ArrayList<>();
@@ -85,7 +86,7 @@ public class ChatScreenFragment extends Fragment {
                         long messageTime = dataSnapshot.child("messageTime").getValue(Long.class);
                         user.setLastMessage(lastMessageText);
                         user.setLastMessageTime(messageTime);
-                        adapter.notifyDataSetChanged();
+                        sortAndNotifyAdapter();
                     }
                 }
             }
@@ -95,5 +96,11 @@ public class ChatScreenFragment extends Fragment {
                 // Handle onCancelled
             }
         });
+    }
+    private void sortAndNotifyAdapter() {
+        // Sort the user list by last message time in descending order
+        Collections.sort(userList);
+        // Notify the adapter that the data has changed
+        adapter.notifyDataSetChanged();
     }
 }

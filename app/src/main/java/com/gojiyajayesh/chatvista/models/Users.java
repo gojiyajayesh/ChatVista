@@ -1,6 +1,6 @@
 package com.gojiyajayesh.chatvista.models;
 
-public class Users {
+public class Users implements Comparable<Users> {
     String StatusUrl;
     private String userId;
     private String username;
@@ -42,6 +42,15 @@ public class Users {
     }
 
     public Users() {
+    }
+
+    @Override
+    public int compareTo(Users other) {
+        // Handle null lastMessageTime
+        Long thisMessageTime = this.lastMessageTime != null ? this.lastMessageTime : Long.MIN_VALUE;
+        Long otherMessageTime = other.getLastMessageTime() != null ? other.getLastMessageTime() : Long.MIN_VALUE;
+
+        return Long.compare(otherMessageTime, thisMessageTime);
     }
 
     public Long getLastStatusUpdateTime() {
